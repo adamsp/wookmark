@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="height:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_height"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="width:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_width"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="imageUri:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_imageUri"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="imagePreviewUri:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_imagePreviewUri"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="refererUri:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_refererUri"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="title:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="url:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/image_url"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>
