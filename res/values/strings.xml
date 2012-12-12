@@ -1,7 +1,0 @@
-<resources>
-
-    <string name="app_name">Wookmark Viewer</string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="title_activity_main">Wookmark Viewer</string>
-
-</resources>
