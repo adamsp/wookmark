@@ -1,3 +1,6 @@
 [submodule "ActionBarSherlock"]
 	path = ActionBarSherlock
 	url = git://github.com/JakeWharton/ActionBarSherlock.git
+[submodule "LazyList"]
+	path = LazyList
+	url = https://github.com/adamsp/LazyList.git
