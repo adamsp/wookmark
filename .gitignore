@@ -16,6 +16,9 @@ local.properties
 .settings/
 .loadpath
 
+# Android
+gen/
+
 # External tool builders
 .externalToolBuilders/
 

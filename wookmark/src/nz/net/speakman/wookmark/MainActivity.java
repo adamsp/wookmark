@@ -20,7 +20,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 public class MainActivity extends SherlockFragmentActivity {
 
-	private ListViewFragment mListViewFragment;
+//	private ListViewFragment mListViewFragment;
+	private AWFragment mAWFragment;
 	private AsyncTask mDownloadTask;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,9 @@ public class MainActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		mListViewFragment = new ListViewFragment();
-		ft.add(R.id.mainView, mListViewFragment);
+		mAWFragment = new AWFragment();
+//		mListViewFragment = new ListViewFragment();
+		ft.add(R.id.mainView, mAWFragment);
 		ft.commit();
 	}
 
@@ -60,7 +62,8 @@ public class MainActivity extends SherlockFragmentActivity {
 	}
 	
 	private void showResults(ArrayList<WookmarkImage> results) {
-		mListViewFragment.updateImages(results);
+		mAWFragment.updateImages(results);
+//		mListViewFragment.updateImages(results);
 	}
 
 	private class DownloadImagesTask extends
