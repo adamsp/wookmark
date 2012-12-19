@@ -17,21 +17,31 @@ import android.view.Window;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.origamilabs.library.views.StaggeredGridView;
 
 public class MainActivity extends SherlockFragmentActivity {
 
 	private ListViewFragment mListViewFragment;
+	private StaggeredGridView mGridView;
 	private AsyncTask mDownloadTask;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// Request Feature must be called before adding content.
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		mListViewFragment = new ListViewFragment();
-		ft.add(R.id.mainView, mListViewFragment);
-		ft.commit();
+
+		mGridView = (StaggeredGridView) this
+				.findViewById(R.id.staggeredGridView1);
+
+		int margin = 2;// getResources().getDimensionPixelSize(R.dimen.margin);
+
+		mGridView.setItemMargin(margin); // set the GridView margin
+
+		mGridView.setPadding(margin, 0, margin, 0); // have the margin on the
+													// sides as well
+
 	}
 
 	@Override
@@ -49,18 +59,24 @@ public class MainActivity extends SherlockFragmentActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	@Override
 	protected void onDestroy() {
-		if(null != mDownloadTask) {
-			Log.d("WSNZ", "Killing background download task as onDestroy() was called before it returned.");
+		if (null != mDownloadTask) {
+			Log.d("WSNZ",
+					"Killing background download task as onDestroy() was called before it returned.");
 			mDownloadTask.cancel(true);
 		}
 		super.onDestroy();
 	}
-	
+
 	private void showResults(ArrayList<WookmarkImage> results) {
-		mListViewFragment.updateImages(results);
+		StaggeredAdapter adapter = new StaggeredAdapter(MainActivity.this,
+				R.id.imageView1, results.toArray(new WookmarkImage[results.size()]));
+
+		mGridView.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+		// mListViewFragment.updateImages(results);
 	}
 
 	private class DownloadImagesTask extends
