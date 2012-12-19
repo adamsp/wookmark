@@ -4,3 +4,6 @@
 [submodule "ActionBarSherlock"]
 	path = ActionBarSherlock
 	url = git://github.com/adamsp/ActionBarSherlock.git
+[submodule "StaggeredGridView"]
+	path = StaggeredGridView
+	url = git://github.com/maurycyw/StaggeredGridView.git
