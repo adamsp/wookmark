@@ -4,3 +4,6 @@
 [submodule "ActionBarSherlock"]
 	path = ActionBarSherlock
 	url = git://github.com/adamsp/ActionBarSherlock.git
+[submodule "AntipodalWall"]
+	path = AntipodalWall
+	url = git://github.com/expilu/AntipodalWall.git
