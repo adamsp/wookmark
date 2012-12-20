@@ -3,7 +3,6 @@ package nz.net.speakman.wookmark;
 import java.util.ArrayList;
 
 import nz.net.speakman.wookmark.images.WookmarkImage;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,6 +40,10 @@ public class AWFragment extends SherlockFragment {
 	public void updateImages(ArrayList<WookmarkImage> images) {
 		for(WookmarkImage image : images) {
 			ImageView iv = new ImageView(mCtx);
+			// Get the width of the column, set the width to this?
+//			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(150,
+//					ViewGroup.LayoutParams.WRAP_CONTENT);
+//			iv.setLayoutParams(lp);
 			mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv);
 			mView.addView(iv);
 		}
