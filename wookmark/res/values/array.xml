@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="menu_titles">
+        <item>Popular</item>
+        <item>New</item>
+        <item>User</item>
+        <item>Group</item>
+        <item>Color</item>
+        <item>Source</item>
+        <item>Search</item>
+    </string-array>
+
+</resources>

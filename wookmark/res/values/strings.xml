@@ -4,4 +4,14 @@
     <string name="menu_refresh">Refresh</string>
     <string name="title_activity_main">Wookmark Viewer</string>
 
+    <!-- Wookmark Endpoints -->
+    <string name="wookmark_endpoint_default">http://www.wookmark.com/api/json/popular</string>
+    <string name="wookmark_endpoint_popular">http://www.wookmark.com/api/json/popular</string>
+    <string name="wookmark_endpoint_new">http://www.wookmark.com/api/json/recent</string>
+    <string name="wookmark_endpoint_user">http://www.wookmark.com/api/json?type=user\u0026userId=</string>
+    <string name="wookmark_endpoint_group">http://www.wookmark.com/api/json?type=group\u0026groupId=</string>
+    <string name="wookmark_endpoint_color">http://www.wookmark.com/api/json?type=color\u0026color=</string>
+    <string name="wookmark_endpoint_source">http://www.wookmark.com/api/json?type=source\u0026sourceId=</string>
+    <string name="wookmark_endpoint_search">http://www.wookmark.com/api/json?type=search\u0026term=</string>
+
 </resources>
