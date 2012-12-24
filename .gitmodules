@@ -1,9 +1,6 @@
 [submodule "LazyList"]
 	path = LazyList
 	url = https://github.com/adamsp/LazyList.git
-[submodule "ActionBarSherlock"]
-	path = ActionBarSherlock
-	url = git://github.com/adamsp/ActionBarSherlock.git
 [submodule "SlidingMenu"]
 	path = SlidingMenu
 	url = git://github.com/jfeinstein10/SlidingMenu.git
