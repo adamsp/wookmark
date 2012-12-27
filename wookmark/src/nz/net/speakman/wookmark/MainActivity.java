@@ -1,8 +1,8 @@
 package nz.net.speakman.wookmark;
 
 import nz.net.speakman.wookmark.fragments.AWFragment;
-import nz.net.speakman.wookmark.fragments.ListViewFragment;
 import nz.net.speakman.wookmark.fragments.MenuFragment;
+import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,7 +22,6 @@ public class MainActivity extends SlidingFragmentActivity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		
-		//mContent = new ListViewFragment(getString(R.string.wookmark_endpoint_default));
 		mContent = new AWFragment(getString(R.string.wookmark_endpoint_default));
 		
 		// set the Above View
@@ -60,8 +59,8 @@ public class MainActivity extends SlidingFragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.menu_refresh:
 			if(mContent != null) {
-				if(mContent instanceof RefreshableView) {
-					((RefreshableView)mContent).refresh();
+				if(mContent instanceof WookmarkBaseFragment) {
+					((WookmarkBaseFragment)mContent).refresh();
 				}
 			}
 			break;
@@ -73,8 +72,8 @@ public class MainActivity extends SlidingFragmentActivity {
 	protected void onDestroy() {
 		if(mContent != null) {
 			Log.d("Wookmark", "Killing background download task as onDestroy() was called before it returned.");
-			if(mContent instanceof RefreshableView) {
-				((RefreshableView)mContent).cancel();
+			if(mContent instanceof WookmarkBaseFragment) {
+				((WookmarkBaseFragment)mContent).cancel();
 			}
 		}
 		super.onDestroy();

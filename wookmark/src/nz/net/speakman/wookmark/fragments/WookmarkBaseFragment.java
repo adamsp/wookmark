@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
-import nz.net.speakman.wookmark.RefreshableView;
-import nz.net.speakman.wookmark.WookmarkArrayAdapter;
-import nz.net.speakman.wookmark.R.layout;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
 import nz.net.speakman.wookmark.images.WookmarkImage;
 
@@ -17,41 +14,53 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.antipodalwall.AntipodalWallLayout;
+import com.fedorvlasov.lazylist.ImageLoader;
 
-public class ListViewFragment extends SherlockListFragment implements RefreshableView {
-	String mUri;
+public abstract class WookmarkBaseFragment extends SherlockFragment {
+	
+	View mView;
 	Context mCtx;
 	AsyncTask mDownloadTask;
-
-	public ListViewFragment(String uri) {
-		mUri = uri;
-		setRetainInstance(true);
-	}
-
+	String mUri;
+	static ImageLoader mImageLoader;
+	
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		mCtx = getActivity().getApplicationContext();
-	}
-
-	public void updateImages(ArrayList<WookmarkImage> images) {
-		WookmarkArrayAdapter adapter = new WookmarkArrayAdapter(this
-				.getActivity().getApplicationContext(), R.layout.text_row,
-				images);
-		setListAdapter(adapter);
+		if (mCtx == null)
+			mCtx = getActivity().getApplicationContext();
+		if (mImageLoader == null)
+			mImageLoader = new ImageLoader(mCtx);
 	}
 	
-
 	public void refresh() {
+		((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).removeAllViews();
 		mDownloadTask = new DownloadImagesTask().execute();
 	}
 	
 	public void cancel() {
 		if(mDownloadTask != null) {
 			mDownloadTask.cancel(true);
+		}
+	}
+	
+	public void updateImages(ArrayList<WookmarkImage> images) {
+		if(mCtx == null)
+			mCtx = getActivity().getApplicationContext();
+		for(WookmarkImage image : images) {
+			ImageView iv = new ImageView(mCtx);
+			mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv);
+			((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).addView(iv);
 		}
 	}
 
@@ -75,6 +84,7 @@ public class ListViewFragment extends SherlockListFragment implements Refreshabl
 		 */
 		@Override
 		protected ArrayList<WookmarkImage> doInBackground(Integer... params) {
+			if(mUri == null) return new ArrayList<WookmarkImage>();
 			WookmarkDownloader wd = new WookmarkDownloader(
 					new DefaultHttpClient());
 			return wd.getImages(mUri);
@@ -108,5 +118,12 @@ public class ListViewFragment extends SherlockListFragment implements Refreshabl
 			}
 			updateImages(results);
 		}
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		// http://stackoverflow.com/questions/6526874/call-removeview-on-the-childs-parent-first
+		((ViewGroup) mView.getParent()).removeView(mView);
 	}
 }

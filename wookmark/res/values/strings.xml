@@ -13,5 +13,6 @@
     <string name="wookmark_endpoint_color">http://www.wookmark.com/api/json?type=color\u0026color=</string>
     <string name="wookmark_endpoint_source">http://www.wookmark.com/api/json?type=source\u0026sourceId=</string>
     <string name="wookmark_endpoint_search">http://www.wookmark.com/api/json?type=search\u0026term=</string>
+    <string name="user_id_text_field">user id...</string>
 
 </resources>

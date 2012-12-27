@@ -32,16 +32,14 @@ public class MenuFragment extends ListFragment {
 		Fragment newContent = null;
 		switch (position) {
 		case 0: // Popular
-//			newContent = new ListViewFragment(getString(R.string.wookmark_endpoint_popular));
 			newContent = new AWFragment(getString(R.string.wookmark_endpoint_popular));
 			break;
 		case 1: // New
-//			newContent = new ListViewFragment(getString(R.string.wookmark_endpoint_new));
 			newContent = new AWFragment(getString(R.string.wookmark_endpoint_new));
 			break;
 		case 2: // User
 			// TODO UserViewFragment
-			//newContent = new UserViewFragment();
+			newContent = new UserViewFragment();
 			break;
 		case 3: // Group
 			// TODO GroupViewFragment
