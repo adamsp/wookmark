@@ -1,7 +1,12 @@
-package nz.net.speakman.wookmark;
+package nz.net.speakman.wookmark.fragments;
 
 import java.util.ArrayList;
 
+import nz.net.speakman.wookmark.MainActivity;
+import nz.net.speakman.wookmark.R;
+import nz.net.speakman.wookmark.RefreshableView;
+import nz.net.speakman.wookmark.WookmarkArrayAdapter;
+import nz.net.speakman.wookmark.R.layout;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
 import nz.net.speakman.wookmark.images.WookmarkImage;
 

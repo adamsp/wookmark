@@ -1,6 +1,5 @@
 package nz.net.speakman.wookmark.fragments;
 
-import nz.net.speakman.wookmark.ListViewFragment;
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
 import android.os.Bundle;
@@ -33,10 +32,12 @@ public class MenuFragment extends ListFragment {
 		Fragment newContent = null;
 		switch (position) {
 		case 0: // Popular
-			newContent = new ListViewFragment(getString(R.string.wookmark_endpoint_popular));
+//			newContent = new ListViewFragment(getString(R.string.wookmark_endpoint_popular));
+			newContent = new AWFragment(getString(R.string.wookmark_endpoint_popular));
 			break;
 		case 1: // New
-			newContent = new ListViewFragment(getString(R.string.wookmark_endpoint_new));
+//			newContent = new ListViewFragment(getString(R.string.wookmark_endpoint_new));
+			newContent = new AWFragment(getString(R.string.wookmark_endpoint_new));
 			break;
 		case 2: // User
 			// TODO UserViewFragment
