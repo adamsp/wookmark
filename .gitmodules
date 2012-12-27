@@ -7,3 +7,6 @@
 [submodule "SlidingMenu"]
 	path = SlidingMenu
 	url = https://github.com/adamsp/SlidingMenu.git
+[submodule "AntipodalWall"]
+	path = AntipodalWall
+	url = https://github.com/adamsp/AntipodalWall.git
