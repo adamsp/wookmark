@@ -3,16 +3,16 @@ package nz.net.speakman.wookmark.fragments;
 import nz.net.speakman.wookmark.R;
 import android.widget.TextView;
 
-public class UserViewFragment extends CategoryFragment  {
+public class GroupViewFragment extends CategoryFragment {
 
 	@Override
 	protected void setUserInputDefaultText(TextView tv) {
-		tv.setText(mCtx.getString(R.string.user_id_default_text));
+		tv.setText(mCtx.getString(R.string.group_id_default_text));
 	}
-	
+
 	@Override
-	protected void updateUri(String input) {	 
-		mUri = getString(R.string.wookmark_endpoint_user) + input;
+	protected void updateUri(String input) {
+		mUri = getString(R.string.wookmark_endpoint_group) + input;
 	}
 
 	@Override

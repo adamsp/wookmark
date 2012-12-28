@@ -3,16 +3,20 @@ package nz.net.speakman.wookmark.fragments;
 import nz.net.speakman.wookmark.R;
 import android.widget.TextView;
 
-public class UserViewFragment extends CategoryFragment  {
+public class ColorViewFragment extends CategoryFragment {
 
-	@Override
-	protected void setUserInputDefaultText(TextView tv) {
-		tv.setText(mCtx.getString(R.string.user_id_default_text));
-	}
+	/**
+	 * Color is RGB, ie FF0000 is Red colors.
+	 */
 	
 	@Override
-	protected void updateUri(String input) {	 
-		mUri = getString(R.string.wookmark_endpoint_user) + input;
+	protected void setUserInputDefaultText(TextView tv) {
+		tv.setText(mCtx.getString(R.string.color_id_default_text));
+	}
+
+	@Override
+	protected void updateUri(String input) {
+		mUri = getString(R.string.wookmark_endpoint_color) + input;
 	}
 
 	@Override
@@ -26,5 +30,4 @@ public class UserViewFragment extends CategoryFragment  {
 		// TODO Validate input
 		return true;
 	}
-
 }

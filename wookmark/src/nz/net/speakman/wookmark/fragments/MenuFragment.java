@@ -43,15 +43,15 @@ public class MenuFragment extends ListFragment {
 			break;
 		case 3: // Group
 			// TODO GroupViewFragment
-			//newContent = new GroupViewFragment();
+			newContent = new GroupViewFragment();
 			break;
 		case 4: // Color
 			// TODO ColorViewFragment
-			//newContent = new ColorViewFragment();
+			newContent = new ColorViewFragment();
 			break;
 		case 5: // Source
 			// TODO SourceViewFragment
-			//newContent = new SourceViewFragment();
+			newContent = new SourceViewFragment();
 			break;
 		case 6: // Search
 			// TODO SearchViewFragment

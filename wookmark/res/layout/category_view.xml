@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <!-- TODO Input can't be just numbers - ie Color view? -->
     <EditText
         android:id="@+id/userTextInput"
         android:layout_width="match_parent"
@@ -14,8 +15,7 @@
         android:inputType="number"
         android:scrollHorizontally="false"
         android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:text="@string/user_id_text_field" >
+        android:singleLine="true" >
     </EditText>
 
     <com.antipodalwall.AntipodalWallLayout
