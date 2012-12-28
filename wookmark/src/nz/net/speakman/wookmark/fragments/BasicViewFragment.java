@@ -13,11 +13,16 @@ import android.view.ViewGroup;
  * 
  */
 public abstract class BasicViewFragment extends WookmarkBaseFragment {
-
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setUri();
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		setUri(); // TODO Should this be called here? Check lifecycle.
 		if (mView == null)
 			mView = inflater.inflate(R.layout.antipodal_wall, null, false);
 		return mView;

@@ -1,7 +1,9 @@
 package nz.net.speakman.wookmark.fragments;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import nz.net.speakman.wookmark.ImageViewActivity;
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
@@ -11,6 +13,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,13 +38,14 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 	Context mCtx;
 	AsyncTask mDownloadTask;
 	String mUri;
+	HashMap<Integer,WookmarkImage> mImageMapping;
 	static ImageLoader mImageLoader;
-	
-	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(mImageMapping == null)
+			mImageMapping = new HashMap<Integer, WookmarkImage>();
 		if (mCtx == null)
 			mCtx = getActivity().getApplicationContext();
 		if (mImageLoader == null)
@@ -64,6 +68,21 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 			mCtx = getActivity().getApplicationContext();
 		for(WookmarkImage image : images) {
 			ImageView iv = new ImageView(mCtx);
+			iv.setId(image.id());
+			if(!mImageMapping.containsKey(image.id()))
+				mImageMapping.put(image.id(), image);
+			iv.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int id = v.getId();
+					if(mImageMapping.containsKey(id)) {
+						Intent intent = new Intent(getSherlockActivity(), ImageViewActivity.class);
+						WookmarkImage image = mImageMapping.get(id);
+						intent.putExtra(ImageViewActivity.IMAGE_KEY, image);
+						startActivity(intent);
+					}
+				}
+			});
 			mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv);
 			((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).addView(iv);
 		}

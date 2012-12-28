@@ -4,6 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 /**
@@ -11,7 +13,7 @@ import android.util.Log;
  * @author Adam Speakman
  *
  */
-public class WookmarkImage {
+public class WookmarkImage implements Parcelable {
 	
 	private int height;
 	private int width;
@@ -34,18 +36,38 @@ public class WookmarkImage {
 		if(json == null) throw new NullPointerException();
 		WookmarkImage i = new WookmarkImage();
 		try {
-			i.height = json.getInt("height");
-			i.width = json.getInt("width");
-			i.id = json.getInt("id");
-			i.imageUriString = json.getString("image");
-			i.imagePreviewUriString = json.getString("preview");
-			i.refererUriString = json.getString("referer");
-			i.title = json.getString("title");
-			i.urlString = json.getString("url");
+			i = new WookmarkImage(
+				json.getInt("height"),
+				json.getInt("width"),
+				json.getInt("id"),
+				json.getString("image"),
+				json.getString("preview"),
+				json.getString("referer"),
+				json.getString("title"),
+				json.getString("url"));
 		} catch (JSONException e) {
 			Log.e("Wookmark", "Ohshit, something went wrong with the Json!", e);
 		}
 		return i;
+	}
+	
+	private WookmarkImage(
+			int height,
+			int width,
+			int id,
+			String imageUriString,
+			String imagePreviewUriString,
+			String refererUriString,
+			String title,
+			String urlString) {
+		this.height = height;
+		this.width = width;
+		this.id = id;
+		this.imageUriString = imageUriString;
+		this.imagePreviewUriString = imagePreviewUriString;
+		this.refererUriString = refererUriString;
+		this.title = title;
+		this.urlString = urlString;
 	}
 	
 	/***
@@ -115,6 +137,47 @@ public class WookmarkImage {
 		if(_url == null)
 			_url = Uri.parse(urlString);
 		return _url;
+	}
+	
+	// this is used to regenerate your object. All Parcelables must have a
+	// CREATOR that implements these two methods
+	public static final Parcelable.Creator<WookmarkImage> CREATOR = new Parcelable.Creator<WookmarkImage>() {
+		public WookmarkImage createFromParcel(Parcel in) {
+			return new WookmarkImage(in);
+		}
+
+		public WookmarkImage[] newArray(int size) {
+			return new WookmarkImage[size];
+		}
+	};
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(height);
+		dest.writeInt(width);
+		dest.writeInt(id);
+		dest.writeString(imageUriString);
+		dest.writeString(imagePreviewUriString);
+		dest.writeString(refererUriString);
+		dest.writeString(title);
+		dest.writeString(urlString);
+	}
+	
+	private WookmarkImage(Parcel in) {
+		this(in.readInt(),
+				in.readInt(),
+				in.readInt(),
+				in.readString(),
+				in.readString(),
+				in.readString(),
+				in.readString(),
+				in.readString());
 	}
 
 }
