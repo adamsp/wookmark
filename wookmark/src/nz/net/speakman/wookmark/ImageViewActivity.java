@@ -1,5 +1,6 @@
 package nz.net.speakman.wookmark;
 
+import nz.net.speakman.wookmark.images.ImageLoaderFactory;
 import nz.net.speakman.wookmark.images.WookmarkImage;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class ImageViewActivity extends SherlockActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(mImageLoader == null) mImageLoader = new ImageLoader(getApplicationContext());
+		if(mImageLoader == null) mImageLoader = ImageLoaderFactory.getImageLoader(getApplicationContext());
 		
 		setContentView(R.layout.image_view);
 		
@@ -29,7 +30,7 @@ public class ImageViewActivity extends SherlockActivity {
 		image = (WookmarkImage)intent.getParcelableExtra(IMAGE_KEY);
 		
 		ImageView iv = (ImageView)findViewById(R.id.image_fullsize);
-		mImageLoader.DisplayImage(image.imageUri().toString(), iv);
+		mImageLoader.DisplayImage(image.imageUri().toString(), iv, false);
 		
 		((TextView)findViewById(R.id.image_title)).setText(image.title());
 		

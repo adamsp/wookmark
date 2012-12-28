@@ -7,6 +7,7 @@ import nz.net.speakman.wookmark.ImageViewActivity;
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
+import nz.net.speakman.wookmark.images.ImageLoaderFactory;
 import nz.net.speakman.wookmark.images.WookmarkImage;
 
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -49,7 +50,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 		if (mCtx == null)
 			mCtx = getActivity().getApplicationContext();
 		if (mImageLoader == null)
-			mImageLoader = new ImageLoader(mCtx);
+			mImageLoader = ImageLoaderFactory.getImageLoader(mCtx);
 	}
 	
 	public void refresh() {
@@ -83,7 +84,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 					}
 				}
 			});
-			mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv);
+			mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv, true);
 			((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).addView(iv);
 		}
 	}
