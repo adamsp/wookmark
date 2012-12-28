@@ -1,7 +1,7 @@
 package nz.net.speakman.wookmark;
 
-import nz.net.speakman.wookmark.fragments.AWFragment;
 import nz.net.speakman.wookmark.fragments.MenuFragment;
+import nz.net.speakman.wookmark.fragments.PopularViewFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,7 +22,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		
-		mContent = new AWFragment(getString(R.string.wookmark_endpoint_default));
+		mContent = new PopularViewFragment();
 		
 		// set the Above View
 		setContentView(R.layout.content_frame);

@@ -5,7 +5,6 @@
     <string name="title_activity_main">Wookmark Viewer</string>
 
     <!-- Wookmark Endpoints -->
-    <string name="wookmark_endpoint_default">http://www.wookmark.com/api/json/popular</string>
     <string name="wookmark_endpoint_popular">http://www.wookmark.com/api/json/popular</string>
     <string name="wookmark_endpoint_new">http://www.wookmark.com/api/json/recent</string>
     <string name="wookmark_endpoint_user">http://www.wookmark.com/api/json?type=user\u0026userId=</string>

@@ -23,6 +23,12 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.antipodalwall.AntipodalWallLayout;
 import com.fedorvlasov.lazylist.ImageLoader;
 
+/**
+ * Contains basic functionality common across all fragments that
+ * display multiple images in an AntipodalWall layout.
+ * @author Adam Speakman
+ *
+ */
 public abstract class WookmarkBaseFragment extends SherlockFragment {
 	
 	View mView;
@@ -35,7 +41,6 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		if (mCtx == null)
 			mCtx = getActivity().getApplicationContext();

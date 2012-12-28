@@ -6,6 +6,11 @@ import org.json.JSONObject;
 import android.net.Uri;
 import android.util.Log;
 
+/**
+ * Represents a Wookmark Image.
+ * @author Adam Speakman
+ *
+ */
 public class WookmarkImage {
 	
 	private int height;
