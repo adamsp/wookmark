@@ -42,6 +42,8 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 	HashMap<Integer,WookmarkImage> mImageMapping;
 	static ImageLoader mImageLoader;
 	
+	public abstract String getTitle(Context ctx);
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

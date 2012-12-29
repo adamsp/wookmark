@@ -1,6 +1,7 @@
 package nz.net.speakman.wookmark.fragments;
 
 import nz.net.speakman.wookmark.R;
+import android.content.Context;
 import android.widget.TextView;
 
 public class ColorViewFragment extends CategoryFragment {
@@ -29,5 +30,10 @@ public class ColorViewFragment extends CategoryFragment {
 	protected boolean inputIsValid(String input) {
 		// TODO Validate input
 		return true;
+	}
+
+	@Override
+	public String getTitle(Context ctx) {
+		return ctx.getString(R.string.fragment_title_color);
 	}
 }

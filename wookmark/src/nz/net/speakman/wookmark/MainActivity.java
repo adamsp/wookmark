@@ -79,8 +79,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		super.onDestroy();
 	}
 		
-	public void switchContent(Fragment fragment) {
+	public void switchContent(WookmarkBaseFragment fragment) {
 		mContent = fragment;
+		setTitle(fragment.getTitle(this));
 		getSupportFragmentManager()
 		.beginTransaction()
 		.replace(R.id.content_frame, fragment)

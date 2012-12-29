@@ -1,6 +1,7 @@
 package nz.net.speakman.wookmark.fragments;
 
 import nz.net.speakman.wookmark.R;
+import android.content.Context;
 
 public class PopularViewFragment extends BasicViewFragment {
 
@@ -9,4 +10,8 @@ public class PopularViewFragment extends BasicViewFragment {
 		mUri = getString(R.string.wookmark_endpoint_popular);
 	}
 
+	@Override
+	public String getTitle(Context ctx) {
+		return ctx.getString(R.string.fragment_title_popular);
+	}
 }

@@ -3,6 +3,14 @@
     <string name="app_name">Wookmark Viewer</string>
     <string name="menu_refresh">Refresh</string>
     <string name="title_activity_main">Wookmark Viewer</string>
+    
+    <!-- Fragment titles -->
+    <string name="fragment_title_color">Color</string>
+    <string name="fragment_title_group">Group</string>
+    <string name="fragment_title_new">New</string>
+    <string name="fragment_title_popular">Popular</string>
+    <string name="fragment_title_source">Source</string>
+    <string name="fragment_title_user">User</string>
 
     <!-- Wookmark Endpoints -->
     <string name="wookmark_endpoint_popular">http://www.wookmark.com/api/json/popular</string>
@@ -19,6 +27,7 @@
     <string name="color_id_default_text">color id...</string>
     <string name="source_id_default_text">source id...</string>
     
-    <string name="view_on_wookmark_com">View on Wookmark.com</string>
+    <!-- Image view option items -->
+    <string name="image_view_option_wookmark_com">View on Wookmark.com</string>
 
 </resources>

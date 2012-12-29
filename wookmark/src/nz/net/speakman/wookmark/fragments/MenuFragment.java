@@ -29,7 +29,7 @@ public class MenuFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView lv, View v, int position, long id) {
-		Fragment newContent = null;
+		WookmarkBaseFragment newContent = null;
 		switch (position) {
 		case 0: // Popular
 			newContent = new PopularViewFragment();
@@ -59,7 +59,7 @@ public class MenuFragment extends ListFragment {
 	}
 
 	// the meat of switching the above fragment
-	private void switchFragment(Fragment fragment) {
+	private void switchFragment(WookmarkBaseFragment fragment) {
 		if (getActivity() == null)
 			return;
 		

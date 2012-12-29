@@ -22,6 +22,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:text="@string/view_on_wookmark_com" />
+        android:text="@string/image_view_option_wookmark_com" />
 
 </LinearLayout>

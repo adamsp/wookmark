@@ -1,6 +1,7 @@
 package nz.net.speakman.wookmark.fragments;
 
 import nz.net.speakman.wookmark.R;
+import android.content.Context;
 import android.widget.TextView;
 
 public class GroupViewFragment extends CategoryFragment {
@@ -27,4 +28,8 @@ public class GroupViewFragment extends CategoryFragment {
 		return true;
 	}
 
+	@Override
+	public String getTitle(Context ctx) {
+		return ctx.getString(R.string.fragment_title_group);
+	}
 }
