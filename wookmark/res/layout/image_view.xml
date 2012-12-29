@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ImageView
+    <nz.net.speakman.wookmark.views.TouchImageView
         android:id="@+id/image_fullsize"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_gravity="center_vertical|center_horizontal" />
 
     <TextView
