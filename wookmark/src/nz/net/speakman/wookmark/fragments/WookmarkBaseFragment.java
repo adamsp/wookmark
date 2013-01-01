@@ -14,6 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Adapter;
 import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -33,14 +35,16 @@ import com.fedorvlasov.lazylist.ImageLoader;
  * @author Adam Speakman
  *
  */
-public abstract class WookmarkBaseFragment extends SherlockFragment {
+public abstract class WookmarkBaseFragment extends SherlockFragment implements Adapter {
 	
 	View mView;
 	Context mCtx;
 	AsyncTask mDownloadTask;
 	String mUri;
 	SparseArray<WookmarkImage> mImageMapping;
+	ArrayList<WookmarkImage> mImages;
 	static ImageLoader mImageLoader;
+	ArrayList<DataSetObserver> mDataSetObservers;
 	
 	public abstract String getTitle(Context ctx);
 	
@@ -56,7 +60,8 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 	}
 	
 	public void refresh() {
-		((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).removeAllViews();
+		Log.d("Wookmark", "Refreshing images.");
+		//((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).removeAllViews();
 		mDownloadTask = new DownloadImagesTask().execute();
 	}
 	
@@ -67,31 +72,119 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 	}
 	
 	public void updateImages(ArrayList<WookmarkImage> images) {
-		if(mCtx == null)
-			mCtx = getActivity().getApplicationContext();
-		for(WookmarkImage image : images) {
-			ImageView iv = new ImageView(mCtx);
-			iv.setId(image.id());
-			mImageMapping.put(image.id(), image);
-			iv.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					int id = v.getId();
-					WookmarkImage image;
-					if((image = mImageMapping.get(id)) != null) {
-						Intent intent = new Intent(getSherlockActivity(), ImageViewActivity.class);
-						intent.putExtra(ImageViewActivity.IMAGE_KEY, image);
-						startActivity(intent);
-					}
-				}
-			});
-			mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv, true);
-			((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).addView(iv);
-		}
+		if(mImages == null) mImages = new ArrayList<WookmarkImage>();
+		Log.d("Wookmark", images.size() + " images returned.");
+		mImages.addAll(images);
+		((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).setAdapter(this);
+//		for(DataSetObserver observer : mDataSetObservers) {
+//			// TODO Notify the observer that the data has changed?
+//		}
 	}
 
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		// http://stackoverflow.com/questions/6526874/call-removeview-on-the-childs-parent-first
+		((ViewGroup) mView.getParent()).removeView(mView);
+	}
+	
+	/**
+	 * Adapter methods.
+	 */
+	@Override
+	public int getCount() {
+		Log.d("Wookmark", "getCount() called");
+		if (mImages == null) return 0;
+		return mImages.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		Log.d("Wookmark", "getItem(" + position + ") called");
+		if (mImages == null || mImages.size() < position) return null;
+		return mImages.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		Log.d("Wookmark", "getItemId(" + position + ") called");
+		// TODO This defaults to 0 - is this right?...
+		if(mImages == null || mImages.size() < position) return 0;
+		return mImages.get(position).id();
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		Log.d("Wookmark", "getItemViewType(" + position + ") called");
+		return 0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		Log.d("Wookmark", "getView() called");
+		if(mImages == null || mImages.size() < position) return null;
+		ImageView iv = null;
+		if(convertView instanceof ImageView)
+			iv = (ImageView)convertView;
+		if(iv == null) {
+			Log.d("Wookmark", "No convertView supplied for getView");
+			iv = new ImageView(mCtx);
+		}
+		WookmarkImage image = mImages.get(position);
+		iv.setId(image.id());
+		mImageMapping.put(image.id(), image);
+		iv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int id = v.getId();
+				WookmarkImage image;
+				if((image = mImageMapping.get(id)) != null) {
+					Intent intent = new Intent(getSherlockActivity(), ImageViewActivity.class);
+					intent.putExtra(ImageViewActivity.IMAGE_KEY, image);
+					startActivity(intent);
+				}
+			}
+		});
+		mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv, true);
+		return iv;
+	}
+
+	@Override
+	public int getViewTypeCount() {
+		return 1;
+	}
+
+	@Override
+	public boolean hasStableIds() {
+		return true;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		boolean isEmpty = mImages == null ? true : mImages.size() == 0 ? true : false;
+		Log.d("Wookmark", "isEmpty returning value " + isEmpty);
+		return isEmpty;
+	}
+
+	@Override
+	public void registerDataSetObserver(DataSetObserver observer) {
+		if(mDataSetObservers == null) mDataSetObservers = new ArrayList<DataSetObserver>();
+		mDataSetObservers.add(observer);
+	}
+
+	@Override
+	public void unregisterDataSetObserver(DataSetObserver observer) {
+		if(mDataSetObservers != null)
+			mDataSetObservers.remove(observer);
+	}
+	
+	/**
+	 * Task for downloading images off the UI thread.
+	 * @author adam
+	 *
+	 */
 	private class DownloadImagesTask extends
-			AsyncTask<Integer, Void, ArrayList<WookmarkImage>> {
+	AsyncTask<Integer, Void, ArrayList<WookmarkImage>> {
 		/**
 		 * Called before the worker thread is executed. Runs on the UI thread.
 		 */
@@ -103,7 +196,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 				ma.setSupportProgressBarIndeterminateVisibility(true);
 			}
 		}
-
+		
 		/**
 		 * The system calls this to perform work in a worker thread and delivers
 		 * it the parameters given to AsyncTask.execute()
@@ -115,7 +208,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 					new DefaultHttpClient());
 			return wd.getImages(mUri);
 		}
-
+		
 		/**
 		 * The system calls this to perform work in the UI thread and delivers
 		 * the result from doInBackground()
@@ -144,12 +237,5 @@ public abstract class WookmarkBaseFragment extends SherlockFragment {
 			}
 			updateImages(results);
 		}
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		// http://stackoverflow.com/questions/6526874/call-removeview-on-the-childs-parent-first
-		((ViewGroup) mView.getParent()).removeView(mView);
 	}
 }
