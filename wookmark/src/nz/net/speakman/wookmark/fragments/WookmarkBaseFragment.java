@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Adapter;
@@ -145,6 +146,10 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 				}
 			}
 		});
+		int widthMeasureSpec = MeasureSpec.makeMeasureSpec(image.width(), MeasureSpec.EXACTLY);
+		int heightMeasureSpec = MeasureSpec.makeMeasureSpec(image.height(),
+				MeasureSpec.EXACTLY);
+		iv.measure(widthMeasureSpec, heightMeasureSpec);
 		mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv, true);
 		return iv;
 	}
