@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import nz.net.speakman.wookmark.ImageViewActivity;
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
+import nz.net.speakman.wookmark.RefreshListener;
+import nz.net.speakman.wookmark.Refreshable;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
 import nz.net.speakman.wookmark.images.ImageLoaderFactory;
 import nz.net.speakman.wookmark.images.WookmarkImage;
@@ -16,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
@@ -36,7 +39,7 @@ import com.fedorvlasov.lazylist.ImageLoader;
  * @author Adam Speakman
  *
  */
-public abstract class WookmarkBaseFragment extends SherlockFragment implements Adapter {
+public abstract class WookmarkBaseFragment extends SherlockFragment implements Adapter, Refreshable {
 	
 	View mView;
 	Context mCtx;
@@ -46,6 +49,12 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 	ArrayList<WookmarkImage> mImages;
 	static ImageLoader mImageLoader;
 	ArrayList<DataSetObserver> mDataSetObservers;
+	ArrayList<RefreshListener> mRefreshListeners;
+	
+	public WookmarkBaseFragment() {
+		if (mRefreshListeners == null)
+			mRefreshListeners = new ArrayList<RefreshListener>();
+	}
 	
 	public abstract String getTitle(Context ctx);
 	
@@ -60,19 +69,47 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 			mImageLoader = ImageLoaderFactory.getImageLoader(mCtx);
 	}
 	
+	@Override
 	public void refresh() {
 		Log.d("Wookmark", "Refreshing images.");
 		//((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).removeAllViews();
+		if(mRefreshListeners != null) {
+			for(RefreshListener listener : mRefreshListeners) {
+				listener.onRefreshStarted(this);
+			}
+		}
 		mDownloadTask = new DownloadImagesTask().execute();
 	}
 	
+	@Override
 	public void cancel() {
 		if(mDownloadTask != null) {
 			mDownloadTask.cancel(true);
 		}
 	}
 	
-	public void updateImages(ArrayList<WookmarkImage> images) {
+	@Override
+	public boolean refreshInProgress() {
+		if(mDownloadTask == null) return false;
+		Status status = mDownloadTask.getStatus();
+		if(status == Status.PENDING || status == Status.RUNNING)
+			return true;
+		return false;
+	}
+
+	@Override
+	public void setRefreshListener(RefreshListener listener) {
+		mRefreshListeners.add(listener);
+	}
+	
+	protected void downloadFinished(ArrayList<WookmarkImage> images) {
+		updateImages(images);
+		for(RefreshListener listener : mRefreshListeners) {
+			listener.onRefreshFinished(this);
+		}
+	}
+	
+	protected void updateImages(ArrayList<WookmarkImage> images) {
 		if(mImages == null) mImages = new ArrayList<WookmarkImage>();
 		Log.d("Wookmark", images.size() + " images returned.");
 		mImages.addAll(images);
@@ -240,7 +277,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 				dialog.show();
 				results = new ArrayList<WookmarkImage>();
 			}
-			updateImages(results);
+			downloadFinished(results);
 		}
 	}
 }

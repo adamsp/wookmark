@@ -6,30 +6,30 @@ import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Window;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity {
+public class MainActivity extends SlidingFragmentActivity implements RefreshListener {
 
 	private Fragment mContent;
+	private MenuItem mRefreshMenuItem;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// Request Feature must be called before adding content.
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		
-		mContent = new PopularViewFragment();
+		WookmarkBaseFragment fragment = new PopularViewFragment();
+		fragment.setRefreshListener(this);
+		mContent = fragment;
 		
 		// set the Above View
 		setContentView(R.layout.content_frame);
-		getSupportFragmentManager()
-		.beginTransaction()
-		.replace(R.id.content_frame, mContent)
-		.commit();
+		setAboveView(mContent);
 		
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
@@ -51,6 +51,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.activity_main, menu);
+		mRefreshMenuItem = menu.findItem(R.id.menu_refresh);
 		return true;
 	}
 
@@ -78,15 +79,36 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 		super.onDestroy();
 	}
-		
-	public void switchContent(WookmarkBaseFragment fragment) {
-		mContent = fragment;
-		setTitle(fragment.getTitle(this));
+
+	private void setAboveView(Fragment fragment){
 		getSupportFragmentManager()
 		.beginTransaction()
 		.replace(R.id.content_frame, fragment)
-		.commit();
+		.commit();	
+	}
+		
+	public void switchContent(WookmarkBaseFragment fragment) {
+		mContent = fragment;
+		fragment.setRefreshListener(this);
+		setTitle(fragment.getTitle(this));
+		setAboveView(fragment);
 		getSlidingMenu().showContent();
+	}
+	
+	private void showRefreshButton(boolean show) {
+		if(mRefreshMenuItem != null)
+			mRefreshMenuItem.setVisible(show);
+		setSupportProgressBarIndeterminateVisibility(!show);
+	}
+
+	@Override
+	public void onRefreshFinished(Refreshable obj) {
+		showRefreshButton(true);
+	}
+
+	@Override
+	public void onRefreshStarted(Refreshable obj) {
+		showRefreshButton(false);
 	}
 
 	

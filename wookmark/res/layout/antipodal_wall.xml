@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:scrollbars="vertical"
-    android:columnCount="4"
+    android:columnCount="3"
     android:padding="2dp"
-    android:verticalSpacing="2dp"
-    android:horizontalSpacing="2dp">
+    android:verticalSpacing="5dp"
+    android:horizontalSpacing="5dp">
     <!-- Your child views go here -->
 </com.antipodalwall.AntipodalWallLayout>

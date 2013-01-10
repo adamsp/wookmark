@@ -18,6 +18,8 @@ public abstract class BasicViewFragment extends WookmarkBaseFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setUri();
+		// TODO Should this be here or somewhere else?
+		refresh();
 	}
 	
 	@Override
