@@ -16,7 +16,7 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainActivity extends SlidingFragmentActivity implements RefreshListener {
 
 	private Fragment mContent;
-	private MenuItem mRefreshMenuItem;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// Request Feature must be called before adding content.
@@ -47,27 +47,6 @@ public class MainActivity extends SlidingFragmentActivity implements RefreshList
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_main, menu);
-		mRefreshMenuItem = menu.findItem(R.id.menu_refresh);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_refresh:
-			if(mContent != null) {
-				if(mContent instanceof WookmarkBaseFragment) {
-					((WookmarkBaseFragment)mContent).refresh();
-				}
-			}
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 	
 	@Override
 	protected void onDestroy() {
@@ -94,21 +73,15 @@ public class MainActivity extends SlidingFragmentActivity implements RefreshList
 		setAboveView(fragment);
 		getSlidingMenu().showContent();
 	}
-	
-	private void showRefreshButton(boolean show) {
-		if(mRefreshMenuItem != null)
-			mRefreshMenuItem.setVisible(show);
-		setSupportProgressBarIndeterminateVisibility(!show);
-	}
 
 	@Override
 	public void onRefreshFinished(Refreshable obj) {
-		showRefreshButton(true);
+		setSupportProgressBarIndeterminateVisibility(false);
 	}
 
 	@Override
 	public void onRefreshStarted(Refreshable obj) {
-		showRefreshButton(false);
+		setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	

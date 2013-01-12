@@ -4,11 +4,10 @@
     <string-array name="menu_titles">
         <item>Popular</item>
         <item>New</item>
-        <item>User</item>
-        <item>Group</item>
         <item>Color</item>
-        <item>Source</item>
         <item>Search</item>
+        <item>Settings</item>
+        <item>About</item>
     </string-array>
 
 </resources>

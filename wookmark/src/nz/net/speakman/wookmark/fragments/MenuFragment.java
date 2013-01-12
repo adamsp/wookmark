@@ -37,21 +37,17 @@ public class MenuFragment extends ListFragment {
 		case 1: // New
 			newContent = new NewViewFragment();
 			break;
-		case 2: // User
-			newContent = new UserViewFragment();
-			break;
-		case 3: // Group
-			newContent = new GroupViewFragment();
-			break;
-		case 4: // Color
+		case 2: // Color
 			newContent = new ColorViewFragment();
 			break;
-		case 5: // Source
-			newContent = new SourceViewFragment();
+		case 3: // Search
+			//newContent = new SearchViewFragment(); // TODO
 			break;
-		case 6: // Search
-			// TODO SearchViewFragment
-			//newContent = new SearchViewFragment();
+		case 4: // Settings
+			//newContent = new SettingsViewFragment(); // TODO
+			break;
+		case 5: // About
+			//newContent = new AboutViewFragment(); // TODO
 			break;
 		}
 		if (newContent != null)
