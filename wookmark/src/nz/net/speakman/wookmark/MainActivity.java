@@ -22,14 +22,18 @@ public class MainActivity extends SlidingFragmentActivity implements RefreshList
 		// Request Feature must be called before adding content.
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-		
-		WookmarkBaseFragment fragment = new PopularViewFragment();
-		fragment.setRefreshListener(this);
-		mContent = fragment;
-		
-		// set the Above View
-		setContentView(R.layout.content_frame);
-		setAboveView(mContent);
+		if(savedInstanceState == null){
+			WookmarkBaseFragment fragment = new PopularViewFragment();
+			fragment.setRefreshListener(this);
+			mContent = fragment;
+			// set the Above View
+			setContentView(R.layout.content_frame);
+			setAboveView(mContent);
+		} else {
+			int id = savedInstanceState.getInt("mContent");
+			mContent = getSupportFragmentManager().findFragmentById(id);
+			setContentView(R.layout.content_frame);
+		}
 		
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
@@ -46,6 +50,13 @@ public class MainActivity extends SlidingFragmentActivity implements RefreshList
         menu.setShadowDrawable(R.drawable.shadow);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		int id = mContent.getId();
+		outState.putInt("mContent", id);
 	}
 	
 	@Override

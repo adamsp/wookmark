@@ -19,7 +19,8 @@ public abstract class BasicViewFragment extends WookmarkBaseFragment {
 		super.onCreate(savedInstanceState);
 		setUri();
 		// TODO Should this be here or somewhere else?
-		refresh();
+		if(savedInstanceState == null) // First-time load!
+			refresh();
 	}
 	
 	@Override

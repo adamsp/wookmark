@@ -54,6 +54,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 	public WookmarkBaseFragment() {
 		if (mRefreshListeners == null)
 			mRefreshListeners = new ArrayList<RefreshListener>();
+		setRetainInstance(true);
 	}
 	
 	public abstract String getTitle(Context ctx);
