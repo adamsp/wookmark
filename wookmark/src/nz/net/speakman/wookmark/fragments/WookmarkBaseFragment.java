@@ -227,17 +227,6 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 	 */
 	private class DownloadImagesTask extends
 	AsyncTask<Integer, Void, ArrayList<WookmarkImage>> {
-		/**
-		 * Called before the worker thread is executed. Runs on the UI thread.
-		 */
-		@Override
-		protected void onPreExecute() {
-			if (getActivity() instanceof MainActivity) {
-				MainActivity ma = (MainActivity) getActivity();
-				ma.setSupportProgress(Window.PROGRESS_END);
-				ma.setSupportProgressBarIndeterminateVisibility(true);
-			}
-		}
 		
 		/**
 		 * The system calls this to perform work in a worker thread and delivers
@@ -261,10 +250,6 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 				Log.d("Wookmark",
 						"This download task has been killed. Not updating results.");
 				return;
-			}
-			if (getActivity() instanceof MainActivity) {
-				((MainActivity) getActivity())
-						.setSupportProgressBarIndeterminateVisibility(false);
 			}
 			if (null == results) {
 				AlertDialog.Builder dialog = new AlertDialog.Builder(mCtx);

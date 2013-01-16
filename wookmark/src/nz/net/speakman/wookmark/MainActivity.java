@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -16,10 +14,12 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainActivity extends SlidingFragmentActivity implements DownloadListener {
 
 	private Fragment mContent;
+	private boolean mProgressBarVisibility;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// Request Feature must be called before adding content.
+		// Note this turns it on by default, ABS thing.
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		if(savedInstanceState == null){
@@ -32,7 +32,12 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 		} else {
 			int id = savedInstanceState.getInt("mContent");
 			mContent = getSupportFragmentManager().findFragmentById(id);
+			if(mContent instanceof Downloader) {
+				((Downloader)mContent).setDownloadListener(this);
+			}
 			setContentView(R.layout.content_frame);
+			boolean progressBarVisible = savedInstanceState.getBoolean("mProgressBarVisibility");
+			setSupportProgressBarIndeterminateVisibility(progressBarVisible);
 		}
 		
 		// set the Behind View
@@ -53,16 +58,23 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 	}
 	
 	@Override
+	public void setSupportProgressBarIndeterminateVisibility(boolean visible) {
+		mProgressBarVisibility = visible;
+		super.setSupportProgressBarIndeterminateVisibility(visible);
+	}
+	
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		int id = mContent.getId();
 		outState.putInt("mContent", id);
+		outState.putBoolean("mProgressBarVisibility", mProgressBarVisibility);
 	}
 	
 	@Override
 	protected void onDestroy() {
 		if(mContent != null) {
-			// TODO Should this be done here, or in the fragment?
+			// TODO Should this be done here, or in the fragment - probably in the fragment?
 			Log.d("Wookmark", "Killing background download task as onDestroy() was called before it returned.");
 			if(mContent instanceof Downloader) {
 				((Downloader)mContent).cancelDownload();
