@@ -13,7 +13,7 @@ import com.actionbarsherlock.view.Window;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity implements RefreshListener {
+public class MainActivity extends SlidingFragmentActivity implements DownloadListener {
 
 	private Fragment mContent;
 	
@@ -24,7 +24,7 @@ public class MainActivity extends SlidingFragmentActivity implements RefreshList
 		super.onCreate(savedInstanceState);
 		if(savedInstanceState == null){
 			WookmarkBaseFragment fragment = new PopularViewFragment();
-			fragment.setRefreshListener(this);
+			fragment.setDownloadListener(this);
 			mContent = fragment;
 			// set the Above View
 			setContentView(R.layout.content_frame);
@@ -62,9 +62,10 @@ public class MainActivity extends SlidingFragmentActivity implements RefreshList
 	@Override
 	protected void onDestroy() {
 		if(mContent != null) {
+			// TODO Should this be done here, or in the fragment?
 			Log.d("Wookmark", "Killing background download task as onDestroy() was called before it returned.");
-			if(mContent instanceof WookmarkBaseFragment) {
-				((WookmarkBaseFragment)mContent).cancel();
+			if(mContent instanceof Downloader) {
+				((Downloader)mContent).cancelDownload();
 			}
 		}
 		super.onDestroy();
@@ -79,19 +80,19 @@ public class MainActivity extends SlidingFragmentActivity implements RefreshList
 		
 	public void switchContent(WookmarkBaseFragment fragment) {
 		mContent = fragment;
-		fragment.setRefreshListener(this);
+		fragment.setDownloadListener(this);
 		setTitle(fragment.getTitle(this));
 		setAboveView(fragment);
 		getSlidingMenu().showContent();
 	}
 
 	@Override
-	public void onRefreshFinished(Refreshable obj) {
+	public void onDownloadFinished(Downloader obj) {
 		setSupportProgressBarIndeterminateVisibility(false);
 	}
 
 	@Override
-	public void onRefreshStarted(Refreshable obj) {
+	public void onDownloadStarted(Downloader obj) {
 		setSupportProgressBarIndeterminateVisibility(true);
 	}
 

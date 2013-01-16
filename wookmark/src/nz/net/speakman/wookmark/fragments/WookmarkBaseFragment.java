@@ -2,11 +2,11 @@ package nz.net.speakman.wookmark.fragments;
 
 import java.util.ArrayList;
 
+import nz.net.speakman.wookmark.DownloadListener;
+import nz.net.speakman.wookmark.Downloader;
 import nz.net.speakman.wookmark.ImageViewActivity;
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
-import nz.net.speakman.wookmark.RefreshListener;
-import nz.net.speakman.wookmark.Refreshable;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
 import nz.net.speakman.wookmark.images.ImageLoaderFactory;
 import nz.net.speakman.wookmark.images.WookmarkImage;
@@ -39,7 +39,7 @@ import com.fedorvlasov.lazylist.ImageLoader;
  * @author Adam Speakman
  *
  */
-public abstract class WookmarkBaseFragment extends SherlockFragment implements Adapter, Refreshable {
+public abstract class WookmarkBaseFragment extends SherlockFragment implements Adapter, Downloader {
 	
 	View mView;
 	Context mCtx;
@@ -49,11 +49,11 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 	ArrayList<WookmarkImage> mImages;
 	static ImageLoader mImageLoader;
 	ArrayList<DataSetObserver> mDataSetObservers;
-	ArrayList<RefreshListener> mRefreshListeners;
+	ArrayList<DownloadListener> mRefreshListeners;
 	
 	public WookmarkBaseFragment() {
 		if (mRefreshListeners == null)
-			mRefreshListeners = new ArrayList<RefreshListener>();
+			mRefreshListeners = new ArrayList<DownloadListener>();
 		setRetainInstance(true);
 	}
 	
@@ -70,27 +70,26 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 			mImageLoader = ImageLoaderFactory.getImageLoader(mCtx);
 	}
 	
-	@Override
-	public void refresh() {
+	protected void refresh() {
 		Log.d("Wookmark", "Refreshing images.");
 		//((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).removeAllViews();
 		if(mRefreshListeners != null) {
-			for(RefreshListener listener : mRefreshListeners) {
-				listener.onRefreshStarted(this);
+			for(DownloadListener listener : mRefreshListeners) {
+				listener.onDownloadStarted(this);
 			}
 		}
 		mDownloadTask = new DownloadImagesTask().execute();
 	}
 	
 	@Override
-	public void cancel() {
+	public void cancelDownload() {
 		if(mDownloadTask != null) {
 			mDownloadTask.cancel(true);
 		}
 	}
 	
 	@Override
-	public boolean refreshInProgress() {
+	public boolean downloadInProgress() {
 		if(mDownloadTask == null) return false;
 		Status status = mDownloadTask.getStatus();
 		if(status == Status.PENDING || status == Status.RUNNING)
@@ -99,14 +98,14 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 	}
 
 	@Override
-	public void setRefreshListener(RefreshListener listener) {
+	public void setDownloadListener(DownloadListener listener) {
 		mRefreshListeners.add(listener);
 	}
 	
 	protected void downloadFinished(ArrayList<WookmarkImage> images) {
 		updateImages(images);
-		for(RefreshListener listener : mRefreshListeners) {
-			listener.onRefreshFinished(this);
+		for(DownloadListener listener : mRefreshListeners) {
+			listener.onDownloadFinished(this);
 		}
 	}
 	
