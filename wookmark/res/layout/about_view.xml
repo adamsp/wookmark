@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/AboutFragmentFont.Heading"
+            android:text="@string/about_view_app_heading" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Detail"
+            android:text="@string/about_view_app_detail"
+            tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Heading"
+            android:text="@string/about_view_licenses_heading" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Detail"
+            android:text="@string/about_view_licenses_detail"
+            tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Detail"
+            android:text="@string/about_view_licenses_detail_actionbar_sherlock"
+            tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Detail"
+            android:text="@string/about_view_licenses_detail_antipodal_wall"
+            tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Detail"
+            android:text="@string/about_view_licenses_detail_lazy_list"
+            tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Detail"
+            android:text="@string/about_view_licenses_detail_sliding_menu"
+            tools:context=".AboutActivity" />
+    </LinearLayout>
+
+</ScrollView>

@@ -2,6 +2,7 @@ package nz.net.speakman.wookmark;
 
 import nz.net.speakman.wookmark.fragments.MenuFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
+import nz.net.speakman.wookmark.fragments.WookmarkBaseImageViewFragment;
 import nz.net.speakman.wookmark.fragments.basic.PopularViewFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +24,7 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		if(savedInstanceState == null){
-			WookmarkBaseFragment fragment = new PopularViewFragment();
+			WookmarkBaseImageViewFragment fragment = new PopularViewFragment();
 			fragment.setDownloadListener(this);
 			mContent = fragment;
 			// set the Above View
@@ -92,7 +93,9 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 		
 	public void switchContent(WookmarkBaseFragment fragment) {
 		mContent = fragment;
-		fragment.setDownloadListener(this);
+		if(fragment instanceof WookmarkBaseImageViewFragment) {
+			((WookmarkBaseImageViewFragment)fragment).setDownloadListener(this);
+		}
 		setTitle(fragment.getTitle(this));
 		setAboveView(fragment);
 		getSlidingMenu().showContent();

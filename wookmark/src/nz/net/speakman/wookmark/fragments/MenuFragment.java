@@ -50,7 +50,7 @@ public class MenuFragment extends ListFragment {
 			//newContent = new SettingsViewFragment(); // TODO
 			break;
 		case 5: // About
-			//newContent = new AboutViewFragment(); // TODO
+			newContent = new AboutFragment();
 			break;
 		}
 		if (newContent != null)

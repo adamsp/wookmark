@@ -1,7 +1,7 @@
 package nz.net.speakman.wookmark.fragments.basic;
 
 import nz.net.speakman.wookmark.R;
-import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
+import nz.net.speakman.wookmark.fragments.WookmarkBaseImageViewFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * @author Adam Speakman
  * 
  */
-public abstract class BasicViewFragment extends WookmarkBaseFragment {
+public abstract class BasicViewFragment extends WookmarkBaseImageViewFragment {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

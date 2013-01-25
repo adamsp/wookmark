@@ -1,7 +1,7 @@
 package nz.net.speakman.wookmark.fragments.search;
 
 import nz.net.speakman.wookmark.R;
-import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
+import nz.net.speakman.wookmark.fragments.WookmarkBaseImageViewFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public abstract class SearchBaseFragment extends WookmarkBaseFragment implements
+public abstract class SearchBaseFragment extends WookmarkBaseImageViewFragment implements
 		OnEditorActionListener {
 	
 	@Override
