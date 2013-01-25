@@ -1,8 +1,8 @@
 package nz.net.speakman.wookmark;
 
 import nz.net.speakman.wookmark.fragments.MenuFragment;
-import nz.net.speakman.wookmark.fragments.PopularViewFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
+import nz.net.speakman.wookmark.fragments.basic.PopularViewFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;

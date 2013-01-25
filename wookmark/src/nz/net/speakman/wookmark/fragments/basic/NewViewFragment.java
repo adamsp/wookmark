@@ -1,4 +1,4 @@
-package nz.net.speakman.wookmark.fragments;
+package nz.net.speakman.wookmark.fragments.basic;
 
 import android.content.Context;
 import nz.net.speakman.wookmark.R;

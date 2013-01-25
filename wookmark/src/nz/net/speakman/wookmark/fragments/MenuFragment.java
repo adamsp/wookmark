@@ -2,6 +2,10 @@ package nz.net.speakman.wookmark.fragments;
 
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
+import nz.net.speakman.wookmark.fragments.basic.NewViewFragment;
+import nz.net.speakman.wookmark.fragments.basic.PopularViewFragment;
+import nz.net.speakman.wookmark.fragments.search.ColorSearchViewFragment;
+import nz.net.speakman.wookmark.fragments.search.TextSearchViewFragment;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -37,10 +41,10 @@ public class MenuFragment extends ListFragment {
 			newContent = new NewViewFragment();
 			break;
 		case 2: // Color
-			newContent = new ColorViewFragment();
+			newContent = new ColorSearchViewFragment();
 			break;
 		case 3: // Search
-			//newContent = new SearchViewFragment(); // TODO
+			newContent = new TextSearchViewFragment();
 			break;
 		case 4: // Settings
 			//newContent = new SettingsViewFragment(); // TODO

@@ -39,10 +39,10 @@ import com.fedorvlasov.lazylist.ImageLoader;
  */
 public abstract class WookmarkBaseFragment extends SherlockFragment implements Adapter, Downloader {
 	
-	View mView;
-	Context mCtx;
+	protected View mView;
+	protected Context mCtx;
 	AsyncTask mDownloadTask;
-	String mUri;
+	protected String mUri;
 	SparseArray<WookmarkImage> mImageMapping;
 	ArrayList<WookmarkImage> mImages;
 	static ImageLoader mImageLoader;

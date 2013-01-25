@@ -1,6 +1,7 @@
-package nz.net.speakman.wookmark.fragments;
+package nz.net.speakman.wookmark.fragments.search;
 
 import nz.net.speakman.wookmark.R;
+import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -12,14 +13,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public abstract class CategoryFragment extends WookmarkBaseFragment implements
+public abstract class SearchBaseFragment extends WookmarkBaseFragment implements
 		OnEditorActionListener {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		if (mView == null)
-			mView = inflater.inflate(R.layout.category_view, null, false);
+			mView = inflater.inflate(R.layout.search_view, null, false);
 		TextView tv = (TextView) mView.findViewById(R.id.userTextInput);
 		tv.setOnEditorActionListener(this);
 		setUserInputDefaultText(tv);

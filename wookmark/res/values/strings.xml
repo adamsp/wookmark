@@ -5,26 +5,19 @@
     
     <!-- Fragment titles -->
     <string name="fragment_title_color">Color</string>
-    <string name="fragment_title_group">Group</string>
     <string name="fragment_title_new">New</string>
     <string name="fragment_title_popular">Popular</string>
-    <string name="fragment_title_source">Source</string>
-    <string name="fragment_title_user">User</string>
+    <string name="fragment_title_search">Search</string>
 
     <!-- Wookmark Endpoints -->
     <string name="wookmark_endpoint_popular">http://www.wookmark.com/api/json/popular</string>
     <string name="wookmark_endpoint_new">http://www.wookmark.com/api/json/recent</string>
-    <string name="wookmark_endpoint_user">http://www.wookmark.com/api/json?type=user\u0026userId=</string>
-    <string name="wookmark_endpoint_group">http://www.wookmark.com/api/json?type=group\u0026groupId=</string>
     <string name="wookmark_endpoint_color">http://www.wookmark.com/api/json?type=color\u0026color=</string>
-    <string name="wookmark_endpoint_source">http://www.wookmark.com/api/json?type=source\u0026sourceId=</string>
     <string name="wookmark_endpoint_search">http://www.wookmark.com/api/json?type=search\u0026term=</string>
     
-    <!-- Category views default search texts -->
-    <string name="user_id_default_text">user id...</string>
-    <string name="group_id_default_text">group id...</string>
-    <string name="color_id_default_text">color id...</string>
-    <string name="source_id_default_text">source id...</string>
+    <!-- Search views default search texts -->
+    <string name="color_search_default_text">color hex code…</string>
+    <string name="text_search_default_text">search…</string>
     
     <!-- Image view option items -->
     <string name="image_view_menu_wookmark_com">View on Wookmark.com</string>

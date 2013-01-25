@@ -1,6 +1,7 @@
-package nz.net.speakman.wookmark.fragments;
+package nz.net.speakman.wookmark.fragments.basic;
 
 import nz.net.speakman.wookmark.R;
+import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public abstract class BasicViewFragment extends WookmarkBaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		if (mView == null)
-			mView = inflater.inflate(R.layout.antipodal_wall, null, false);
+			mView = inflater.inflate(R.layout.basic_view, null, false);
 		return mView;
 	}
 

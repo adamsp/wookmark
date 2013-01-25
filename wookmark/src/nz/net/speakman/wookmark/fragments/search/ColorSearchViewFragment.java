@@ -1,10 +1,11 @@
-package nz.net.speakman.wookmark.fragments;
+package nz.net.speakman.wookmark.fragments.search;
 
 import nz.net.speakman.wookmark.R;
 import android.content.Context;
+import android.text.InputType;
 import android.widget.TextView;
 
-public class ColorViewFragment extends CategoryFragment {
+public class ColorSearchViewFragment extends SearchBaseFragment {
 
 	/**
 	 * Color is RGB, ie FF0000 is Red colors.
@@ -12,7 +13,9 @@ public class ColorViewFragment extends CategoryFragment {
 	
 	@Override
 	protected void setUserInputDefaultText(TextView tv) {
-		tv.setText(mCtx.getString(R.string.color_id_default_text));
+		tv.setText(R.string.color_search_default_text);
+		// TODO Ew. This needs a color picker.
+		tv.setInputType(InputType.TYPE_CLASS_NUMBER);
 	}
 
 	@Override
