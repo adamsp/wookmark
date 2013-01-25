@@ -146,7 +146,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 		Log.d("Wookmark", "getItemId(" + position + ") called");
 		// TODO This defaults to 0 - is this right?...
 		if(mImages == null || mImages.size() < position) return 0;
-		return mImages.get(position).id();
+		return mImages.get(position).getId();
 	}
 
 	@Override
@@ -167,8 +167,8 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 			iv = new ImageView(mCtx);
 		}
 		WookmarkImage image = mImages.get(position);
-		iv.setId(image.id());
-		mImageMapping.put(image.id(), image);
+		iv.setId(image.getId());
+		mImageMapping.put(image.getId(), image);
 		iv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -181,11 +181,11 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 				}
 			}
 		});
-		int widthMeasureSpec = MeasureSpec.makeMeasureSpec(image.width(), MeasureSpec.EXACTLY);
-		int heightMeasureSpec = MeasureSpec.makeMeasureSpec(image.height(),
+		int widthMeasureSpec = MeasureSpec.makeMeasureSpec(image.getWidth(), MeasureSpec.EXACTLY);
+		int heightMeasureSpec = MeasureSpec.makeMeasureSpec(image.getHeight(),
 				MeasureSpec.EXACTLY);
 		iv.measure(widthMeasureSpec, heightMeasureSpec);
-		mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv, true, null);
+		mImageLoader.DisplayImage(image.getImagePreviewUri().toString(), iv, true, null);
 		return iv;
 	}
 

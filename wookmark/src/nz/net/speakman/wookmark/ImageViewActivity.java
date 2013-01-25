@@ -34,13 +34,13 @@ public class ImageViewActivity extends SherlockActivity {
 		mImage = (WookmarkImage)intent.getParcelableExtra(IMAGE_KEY);
 
 		ImageView iv = (ImageView)findViewById(R.id.image_fullsize);
-		mImageLoader.DisplayImage(mImage.imageUri().toString(), iv, false, new ImageLoader.OnImageLoadFinishedListener() {
+		mImageLoader.DisplayImage(mImage.getImageUri().toString(), iv, false, new ImageLoader.OnImageLoadFinishedListener() {
 			@Override
 			public void onFinished() {
 				setSupportProgressBarIndeterminateVisibility(false);
 			}
 		});
-		setTitle(mImage.title());
+		setTitle(mImage.getTitle());
 	}
 	
 	@Override
@@ -69,23 +69,23 @@ public class ImageViewActivity extends SherlockActivity {
 	private void startShareIntent() {
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.image_view_share_content), mImage.title(), mImage.url()));
+		sendIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.image_view_share_content), mImage.getTitle(), mImage.getUrl()));
 		sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.image_view_share_subject));
 		sendIntent.setType("text/plain");
 		startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.image_view_share_title)));
 	}
 	
 	private void startWookmarkWebsiteIntent() {
-		Intent sendIntent = new Intent(Intent.ACTION_VIEW, mImage.url());
+		Intent sendIntent = new Intent(Intent.ACTION_VIEW, mImage.getUrl());
 		startActivity(sendIntent);
 	}
 
 	private void showAdditionalDetailDialog() {
 		String[] details = new String[] { 
-				String.format(getString(R.string.image_view_detail_image_title), mImage.title()),
-				String.format(getString(R.string.image_view_detail_image_width), mImage.width()),
-				String.format(getString(R.string.image_view_detail_image_height), mImage.height()),
-				String.format(getString(R.string.image_view_detail_image_referer), mImage.refererUri()) // TODO Auto-link this - make it clickable?
+				String.format(getString(R.string.image_view_detail_image_title), mImage.getTitle()),
+				String.format(getString(R.string.image_view_detail_image_width), mImage.getWidth()),
+				String.format(getString(R.string.image_view_detail_image_height), mImage.getHeight()),
+				String.format(getString(R.string.image_view_detail_image_referer), mImage.getRefererUri()) // TODO Auto-link this - make it clickable?
 		};
 		
 		// 1. Instantiate an AlertDialog.Builder with its constructor

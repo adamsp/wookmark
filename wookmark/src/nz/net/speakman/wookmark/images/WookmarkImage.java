@@ -74,32 +74,32 @@ public class WookmarkImage implements Parcelable {
 	 * Height of the image.
 	 * @return The height of the image, in pixels.
 	 */
-	public int height() { return height ; }
+	public int getHeight() { return height ; }
 	
 	/***
 	 * Width of the image.
 	 * @return The width of the image, in pixels.
 	 */
-	public int width() { return width ; }
+	public int getWidth() { return width ; }
 	
 	/***
 	 * Image ID on Wookmark.com.
 	 * @return The unique image ID.
 	 */
-	public int id() { return id; }
+	public int getId() { return id; }
 	
 	/***
 	 * The image title on Wookmark.com.
 	 * @return The image title.
 	 */
-	public String title() { return title; }
+	public String getTitle() { return title; }
 	
 	private Uri _imageUri;
 	/***
 	 * The Uri of the image on Wookmark.com.
 	 * @return The image Uri.
 	 */
-	public Uri imageUri() {
+	public Uri getImageUri() {
 		if(_imageUri == null)
 			_imageUri = Uri.parse(imageUriString);
 		return _imageUri;
@@ -110,7 +110,7 @@ public class WookmarkImage implements Parcelable {
 	 * The Uri of a preview (thumbnail) of the image on Wookmark.com.
 	 * @return The image preview Uri.
 	 */
-	public Uri imagePreviewUri() {
+	public Uri getImagePreviewUri() {
 		if(_imagePreviewUri == null)
 			_imagePreviewUri = Uri.parse(imagePreviewUriString);
 		return _imagePreviewUri;
@@ -121,7 +121,7 @@ public class WookmarkImage implements Parcelable {
 	 * The Uri of the image referer.
 	 * @return The referer Uri.
 	 */
-	public Uri refererUri() {
+	public Uri getRefererUri() {
 		if(_refererUri == null)
 			_refererUri = Uri.parse(refererUriString);
 		return _refererUri;
@@ -133,7 +133,7 @@ public class WookmarkImage implements Parcelable {
 	 * rather the page it appears on.
 	 * @return The Url of the images page.
 	 */
-	public Uri url() {
+	public Uri getUrl() {
 		if(_url == null)
 			_url = Uri.parse(urlString);
 		return _url;
@@ -153,7 +153,6 @@ public class WookmarkImage implements Parcelable {
 
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
