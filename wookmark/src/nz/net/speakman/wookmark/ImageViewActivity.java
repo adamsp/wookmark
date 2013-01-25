@@ -5,10 +5,7 @@ import nz.net.speakman.wookmark.images.WookmarkImage;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnLayoutChangeListener;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -62,7 +59,7 @@ public class ImageViewActivity extends SherlockActivity {
 			startShareIntent();
 			break;
 		case R.id.image_view_menu_wookmark_com:
-			// TODO
+			startWookmarkWebsiteIntent();
 			break;
 			// TODO Add a 'view on original site' link?
 		}
@@ -76,6 +73,11 @@ public class ImageViewActivity extends SherlockActivity {
 		sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.image_view_share_subject));
 		sendIntent.setType("text/plain");
 		startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.image_view_share_title)));
+	}
+	
+	private void startWookmarkWebsiteIntent() {
+		Intent sendIntent = new Intent(Intent.ACTION_VIEW, mImage.url());
+		startActivity(sendIntent);
 	}
 
 	private void showAdditionalDetailDialog() {
