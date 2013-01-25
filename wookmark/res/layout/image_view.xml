@@ -10,18 +10,4 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical|center_horizontal" />
 
-    <TextView
-        android:id="@+id/image_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <Button
-        android:id="@+id/wookmark_site_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:text="@string/image_view_option_wookmark_com" />
-
 </LinearLayout>

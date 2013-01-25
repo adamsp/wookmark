@@ -15,7 +15,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.util.Log;
@@ -33,7 +32,6 @@ public class WookmarkDownloader {
 		if (null == source)
 			return images;
 		String json = getJSONString(source); 
-		JSONObject o;
 		try {
 			JSONTokener tokener = new JSONTokener(json);
 			JSONArray array = (JSONArray) tokener.nextValue();

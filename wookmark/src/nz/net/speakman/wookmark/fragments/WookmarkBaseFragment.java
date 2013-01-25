@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import nz.net.speakman.wookmark.DownloadListener;
 import nz.net.speakman.wookmark.Downloader;
 import nz.net.speakman.wookmark.ImageViewActivity;
-import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
 import nz.net.speakman.wookmark.images.ImageLoaderFactory;
@@ -25,7 +24,6 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Adapter;
 import android.widget.ImageView;
 
@@ -187,7 +185,7 @@ public abstract class WookmarkBaseFragment extends SherlockFragment implements A
 		int heightMeasureSpec = MeasureSpec.makeMeasureSpec(image.height(),
 				MeasureSpec.EXACTLY);
 		iv.measure(widthMeasureSpec, heightMeasureSpec);
-		mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv, true);
+		mImageLoader.DisplayImage(image.imagePreviewUri().toString(), iv, true, null);
 		return iv;
 	}
 
