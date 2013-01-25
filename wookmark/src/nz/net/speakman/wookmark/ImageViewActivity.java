@@ -59,20 +59,31 @@ public class ImageViewActivity extends SherlockActivity {
 			showAdditionalDetailDialog();
 			break;
 		case R.id.image_view_menu_share:
-			// TODO
+			startShareIntent();
 			break;
 		case R.id.image_view_menu_wookmark_com:
 			// TODO
 			break;
+			// TODO Add a 'view on original site' link?
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void startShareIntent() {
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.image_view_share_content), mImage.title(), mImage.url()));
+		sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.image_view_share_subject));
+		sendIntent.setType("text/plain");
+		startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.image_view_share_title)));
 	}
 
 	private void showAdditionalDetailDialog() {
 		String[] details = new String[] { 
 				String.format(getString(R.string.image_view_detail_image_title), mImage.title()),
 				String.format(getString(R.string.image_view_detail_image_width), mImage.width()),
-				String.format(getString(R.string.image_view_detail_image_height), mImage.height())
+				String.format(getString(R.string.image_view_detail_image_height), mImage.height()),
+				String.format(getString(R.string.image_view_detail_image_referer), mImage.refererUri()) // TODO Auto-link this - make it clickable?
 		};
 		
 		// 1. Instantiate an AlertDialog.Builder with its constructor
