@@ -39,10 +39,10 @@ public abstract class SearchBaseFragment extends WookmarkBaseImageViewFragment i
 	@Override
 	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 		boolean consumed = false;
-		if (actionId == EditorInfo.IME_ACTION_DONE
-				|| actionId == EditorInfo.IME_ACTION_GO
-				|| actionId == EditorInfo.IME_NULL) {
-			String userInput = ((TextView)mView.findViewById(R.id.userTextInput)).getText().toString();
+		if (actionId == EditorInfo.IME_NULL
+				|| actionId == EditorInfo.IME_ACTION_SEARCH) {
+			TextView tv = (TextView)mView.findViewById(R.id.userTextInput);
+			String userInput = tv.getText().toString();
 			if (inputIsValid(userInput)) {
 				InputMethodManager imm = (InputMethodManager) mCtx
 						.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -51,8 +51,10 @@ public abstract class SearchBaseFragment extends WookmarkBaseImageViewFragment i
 						0);
 				updateUri(userInput);
 				refresh();
+				tv.clearFocus();
 			} else {
 				showBadInputWarning(userInput);
+				tv.requestFocus();
 			}
 			consumed = true;
 		}

@@ -155,7 +155,7 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Log.d("Wookmark", "getView() called");
-		if(mImages == null || mImages.size() < position) return null;
+		if(mImages == null || mImages.size() < position || position < 0) return null;
 		ImageView iv = null;
 		if(convertView instanceof ImageView)
 			iv = (ImageView)convertView;

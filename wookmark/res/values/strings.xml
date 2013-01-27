@@ -19,6 +19,9 @@
     <!-- Search views default search texts -->
     <string name="color_search_default_text">color hex code…</string>
     <string name="text_search_default_text">search…</string>
+    
+    <!-- Search view bad input text -->
+    <string name="text_search_bad_input_text">That search is no good! Try something else.</string>
 
     <!-- Image view option items -->
     <string name="image_view_menu_wookmark_com">View on Wookmark.com</string>

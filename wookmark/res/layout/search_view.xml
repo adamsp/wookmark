@@ -2,20 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:orientation="vertical" >
+
+    <!--
+    We require a focusable layout in order to allow the EditText
+    to be un-focusable. If we didnt have it, then EditText would
+    always have focus, being the first focusable view.
+    -->
 
     <EditText
         android:id="@+id/userTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:gravity="center_vertical|end"
-        android:imeOptions="actionGo|actionDone"
+        android:hint="@string/text_search_default_text"
+        android:imeOptions="actionSearch"
         android:scrollHorizontally="false"
         android:selectAllOnFocus="true"
         android:singleLine="true" >
     </EditText>
 
-   <include layout="@layout/basic_view" />
+    <include layout="@layout/basic_view" />
 
 </LinearLayout>
