@@ -2,12 +2,11 @@
 <resources>
 
     <string-array name="menu_titles">
-        <item>Popular</item>
-        <item>New</item>
-        <item>Color</item>
-        <item>Search</item>
-        <item>Settings</item>
-        <item>About</item>
+        <item>@string/fragment_title_popular</item>
+        <item>@string/fragment_title_new</item>
+        <item>@string/fragment_title_color_search</item>
+        <item>@string/fragment_title_settings</item>
+        <item>@string/fragment_title_about</item>
     </string-array>
 
 </resources>

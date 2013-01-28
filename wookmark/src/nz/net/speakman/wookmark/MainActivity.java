@@ -4,10 +4,21 @@ import nz.net.speakman.wookmark.fragments.MenuFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseImageViewFragment;
 import nz.net.speakman.wookmark.fragments.basic.PopularViewFragment;
+import nz.net.speakman.wookmark.fragments.basic.SearchViewFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -56,6 +67,50 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
         menu.setShadowDrawable(R.drawable.shadow);
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
+	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+    	menu.add(R.string.text_search_default_text)
+            .setIcon(R.drawable.abs__ic_search)
+            .setActionView(R.layout.collapsible_edittext)
+            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+    	MenuItem item = menu.getItem(0);
+    	EditText et = (EditText)item.getActionView();
+    	et.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				boolean consumed = false;
+				if (actionId == EditorInfo.IME_NULL
+						|| actionId == EditorInfo.IME_ACTION_SEARCH) {
+					String userInput = v.getText().toString();
+					if (inputIsValid(userInput)) {
+						InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+						imm.hideSoftInputFromWindow(
+								v.getWindowToken(),
+								0);
+						v.clearFocus();
+						SearchViewFragment f = new SearchViewFragment(userInput);
+						switchContent(f);
+					} else {
+						showBadInputWarning(userInput);
+						v.requestFocus();
+					}
+					consumed = true;
+				}
+				return consumed;
+			}
+		});
+
+        return true;
+    }
+    	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override
@@ -109,6 +164,22 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 	@Override
 	public void onDownloadStarted(Downloader obj) {
 		setSupportProgressBarIndeterminateVisibility(true);
+	}
+	
+	public void showBadInputWarning(String input) {
+		Toast toast = Toast.makeText(this,
+				getString(R.string.text_search_bad_input_text),
+				Toast.LENGTH_SHORT);
+		toast.show();
+	}
+
+	public boolean inputIsValid(String input) {
+		if (input == null)
+			return false;
+		input = input.trim();
+		if (input.length() == 0)
+			return false;
+		return true;
 	}
 
 	

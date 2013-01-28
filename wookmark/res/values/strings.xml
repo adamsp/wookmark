@@ -4,11 +4,12 @@
     <string name="title_activity_main">Wookmark Viewer</string>
 
     <!-- Fragment titles -->
-    <string name="fragment_title_color">Color</string>
+    <string name="fragment_title_color_search">Color Search</string>
     <string name="fragment_title_new">New</string>
     <string name="fragment_title_popular">Popular</string>
-    <string name="fragment_title_search">Search</string>
+    <string name="fragment_title_search">Search: %s</string>
     <string name="fragment_title_about">About</string>
+    <string name="fragment_title_settings">Settings</string>
 
     <!-- Wookmark Endpoints -->
     <string name="wookmark_endpoint_popular">http://www.wookmark.com/api/json/popular</string>
@@ -18,7 +19,7 @@
 
     <!-- Search views default search texts -->
     <string name="color_search_default_text">color hex code…</string>
-    <string name="text_search_default_text">search…</string>
+    <string name="text_search_default_text">Search</string>
     
     <!-- Search view bad input text -->
     <string name="text_search_bad_input_text">That search is no good! Try something else.</string>
