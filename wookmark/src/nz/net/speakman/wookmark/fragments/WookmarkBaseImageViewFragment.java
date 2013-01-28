@@ -37,7 +37,11 @@ import com.fedorvlasov.lazylist.ImageLoader;
  *
  */
 public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment implements Adapter, Downloader {
-	
+	/**
+	 * The number of views before the end of available ones before
+	 * we download new ones.
+	 */
+	private static final int END_OF_LIST_BUFFER_VALUE = 10;
 	protected View mView;
 	protected Context mCtx;
 	AsyncTask mDownloadTask;
@@ -47,6 +51,7 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	static ImageLoader mImageLoader;
 	ArrayList<DataSetObserver> mDataSetObservers;
 	ArrayList<DownloadListener> mRefreshListeners;
+	int mPage;
 	
 	public WookmarkBaseImageViewFragment() {
 		if (mRefreshListeners == null)
@@ -66,14 +71,18 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	}
 	
 	protected void refresh() {
+		if(downloadInProgress()) {
+			Log.d("Wookmark", "Download already in progress, not updating images.");
+			return;
+		}
 		Log.d("Wookmark", "Refreshing images.");
-		//((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).removeAllViews();
 		if(mRefreshListeners != null) {
 			for(DownloadListener listener : mRefreshListeners) {
 				listener.onDownloadStarted(this);
 			}
 		}
-		mDownloadTask = new DownloadImagesTask().execute();
+		mDownloadTask = new DownloadImagesTask().execute(mPage);
+		mPage++;
 	}
 	
 	@Override
@@ -156,6 +165,10 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Log.d("Wookmark", "getView() called");
 		if(mImages == null || mImages.size() < position || position < 0) return null;
+		if(nearingEndOfAvailableViews(position)) {
+			refresh();
+		}
+		
 		ImageView iv = null;
 		if(convertView instanceof ImageView)
 			iv = (ImageView)convertView;
@@ -184,6 +197,14 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 		iv.measure(widthMeasureSpec, heightMeasureSpec);
 		mImageLoader.DisplayImage(image.getImagePreviewUri().toString(), iv, true, null);
 		return iv;
+	}
+
+	private boolean nearingEndOfAvailableViews(int position) {
+		if (mImages == null || mImages.size() == 0)
+			return false;
+		if (position > mImages.size() - END_OF_LIST_BUFFER_VALUE)
+			return true;
+		return false;
 	}
 
 	@Override
@@ -232,7 +253,16 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 			if(mUri == null) return new ArrayList<WookmarkImage>();
 			WookmarkDownloader wd = new WookmarkDownloader(
 					new DefaultHttpClient());
-			return wd.getImages(mUri);
+			String endpoint = mUri;
+			if(params.length > 0) {
+				if(mUri.equals(getString(R.string.wookmark_endpoint_new))
+						|| mUri.equals(getString(R.string.wookmark_endpoint_popular))) {
+					endpoint += "?page=" + params[0];
+				} else {
+					endpoint += "&page=" + params[0];
+				}
+			}
+			return wd.getImages(endpoint);
 		}
 		
 		/**
