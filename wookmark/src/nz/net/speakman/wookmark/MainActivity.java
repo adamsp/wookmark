@@ -47,6 +47,9 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 			if(mContent instanceof Downloader) {
 				((Downloader)mContent).setDownloadListener(this);
 			}
+			if(mContent instanceof WookmarkBaseFragment) {
+				setTitle(((WookmarkBaseFragment)mContent).getTitle(this));
+			}
 			setContentView(R.layout.content_frame);
 			boolean progressBarVisible = savedInstanceState.getBoolean("mProgressBarVisibility");
 			setSupportProgressBarIndeterminateVisibility(progressBarVisible);
