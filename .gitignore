@@ -1,4 +1,15 @@
 #################
+## IntelliJ
+#################
+
+.idea
+*.iml
+*.ipr
+*.iws
+classes
+gen-external-apklibs
+
+#################
 ## Eclipse
 #################
 
@@ -18,6 +29,18 @@ local.properties
 
 # Android
 gen/
+lint.xml
+
+#Maven
+target
+release.properties
+pom.xml.*
+
+#Ant
+build.xml
+ant.properties
+proguard.cfg
+proguard-project.txt
 
 # External tool builders
 .externalToolBuilders/
