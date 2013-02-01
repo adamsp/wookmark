@@ -30,7 +30,7 @@ public class WookmarkDownloader {
 		ArrayList<WookmarkImage> images = new ArrayList<WookmarkImage>();
 		InputStream source = retrieveStream(url);
 		if (null == source)
-			return images;
+			return null;
 		String json = getJSONString(source); 
 		try {
 			JSONTokener tokener = new JSONTokener(json);

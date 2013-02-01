@@ -21,7 +21,7 @@ public abstract class BasicViewFragment extends WookmarkBaseImageViewFragment {
 		setUri();
 		// TODO Should this be here or somewhere else?
 		if(savedInstanceState == null) // First-time load!
-			refresh();
+			getNewImages();
 	}
 	
 	@Override

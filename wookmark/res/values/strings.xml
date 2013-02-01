@@ -17,6 +17,12 @@
     <string name="wookmark_endpoint_color">http://www.wookmark.com/api/json?type=color\u0026color=</string>
     <string name="wookmark_endpoint_search">http://www.wookmark.com/api/json?type=search\u0026term=</string>
 
+    <!-- Wall View error messages -->
+    <string name="wall_view_no_connection_title">No Connection</string>
+    <string name="wall_view_no_connection_message">There appears to be a problem with the connection. Please make sure
+        you have internet connectivity.</string>
+    <string name="wall_view_no_connection_close_button">Close</string>
+
     <!-- Search views default search texts -->
     <string name="color_search_default_text">color hex code…</string>
     <string name="text_search_default_text">Search</string>

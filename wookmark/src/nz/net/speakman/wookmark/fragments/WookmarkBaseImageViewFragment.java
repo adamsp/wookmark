@@ -39,7 +39,7 @@ import com.fedorvlasov.lazylist.ImageLoader;
 public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment implements Adapter, Downloader {
 	/**
 	 * The number of views before the end of available ones before
-	 * we download new ones.
+	 * we start to download new ones.
 	 */
 	private static final int END_OF_LIST_BUFFER_VALUE = 10;
 	protected View mView;
@@ -51,9 +51,17 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	static ImageLoader mImageLoader;
 	ArrayList<DataSetObserver> mDataSetObservers;
 	ArrayList<DownloadListener> mRefreshListeners;
+    /**
+     * The next page to request from Wookmark when fetching new images.
+     */
 	int mPage;
-	
-	public WookmarkBaseImageViewFragment() {
+    /**
+     * Used to track if there are no more images available
+     * from Wookmark, so we don't keep requesting empty result sets.
+     */
+    private boolean mNoMoreImages;
+
+    public WookmarkBaseImageViewFragment() {
 		if (mRefreshListeners == null)
 			mRefreshListeners = new ArrayList<DownloadListener>();
 		setRetainInstance(true);
@@ -70,12 +78,12 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 			mImageLoader = ImageLoaderFactory.getImageLoader(mCtx);
 	}
 	
-	protected void refresh() {
+	protected void getNewImages() {
 		if(downloadInProgress()) {
 			Log.d("Wookmark", "Download already in progress, not updating images.");
 			return;
 		}
-		Log.d("Wookmark", "Refreshing images.");
+		Log.d("Wookmark", "Fetching new images.");
 		if(mRefreshListeners != null) {
 			for(DownloadListener listener : mRefreshListeners) {
 				listener.onDownloadStarted(this);
@@ -106,16 +114,20 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 		mRefreshListeners.add(listener);
 	}
 	
-	protected void downloadFinished(ArrayList<WookmarkImage> images) {
-		updateImages(images);
+	protected void onDownloadFinished(ArrayList<WookmarkImage> images) {
+        if(images != null) {
+		    addNewImages(images);
+        }
 		for(DownloadListener listener : mRefreshListeners) {
 			listener.onDownloadFinished(this);
 		}
 	}
 	
-	protected void updateImages(ArrayList<WookmarkImage> images) {
+	protected void addNewImages(ArrayList<WookmarkImage> images) {
 		if(mImages == null) mImages = new ArrayList<WookmarkImage>();
-		Log.d("Wookmark", images.size() + " images returned.");
+        if(images.size() == 0) {
+            mNoMoreImages = true;
+        }
 		mImages.addAll(images);
 		((AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall)).setAdapter(this);
 //		for(DataSetObserver observer : mDataSetObservers) {
@@ -135,21 +147,18 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	 */
 	@Override
 	public int getCount() {
-		Log.d("Wookmark", "getCount() called");
 		if (mImages == null) return 0;
 		return mImages.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		Log.d("Wookmark", "getItem(" + position + ") called");
-		if (mImages == null || mImages.size() < position) return null;
+		if (mImages == null || mImages.size() < position || position < 0) return null;
 		return mImages.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		Log.d("Wookmark", "getItemId(" + position + ") called");
 		// TODO This defaults to 0 - is this right?...
 		if(mImages == null || mImages.size() < position) return 0;
 		return mImages.get(position).getId();
@@ -157,23 +166,20 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 
 	@Override
 	public int getItemViewType(int position) {
-		Log.d("Wookmark", "getItemViewType(" + position + ") called");
 		return 0;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.d("Wookmark", "getView() called");
 		if(mImages == null || mImages.size() < position || position < 0) return null;
-		if(nearingEndOfAvailableViews(position)) {
-			refresh();
+		if(nearingEndOfAvailableViews(position) && !mNoMoreImages) {
+			getNewImages();
 		}
 		
 		ImageView iv = null;
 		if(convertView instanceof ImageView)
 			iv = (ImageView)convertView;
 		if(iv == null) {
-			Log.d("Wookmark", "No convertView supplied for getView");
 			iv = new ImageView(mCtx);
 		}
 		WookmarkImage image = mImages.get(position);
@@ -219,9 +225,7 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 
 	@Override
 	public boolean isEmpty() {
-		boolean isEmpty = mImages == null ? true : mImages.size() == 0 ? true : false;
-		Log.d("Wookmark", "isEmpty returning value " + isEmpty);
-		return isEmpty;
+		return (mImages == null || mImages.size() == 0);
 	}
 
 	@Override
@@ -278,16 +282,12 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 			}
 			if (null == results) {
 				AlertDialog.Builder dialog = new AlertDialog.Builder(mCtx);
-				dialog.setTitle("No Connection")
-						.setMessage(
-								"There appears to be a problem "
-										+ "with the connection. Please make sure "
-										+ "you have internet connectivity.")
-						.setNeutralButton("Close", null);
+				dialog.setTitle(getString(R.string.wall_view_no_connection_title))
+						.setMessage(getString(R.string.wall_view_no_connection_message))
+						.setNeutralButton(getString(R.string.wall_view_no_connection_close_button), null);
 				dialog.show();
-				results = new ArrayList<WookmarkImage>();
 			}
-			downloadFinished(results);
+			onDownloadFinished(results);
 		}
 	}
 }
