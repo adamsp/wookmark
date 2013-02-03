@@ -1,5 +1,6 @@
 package nz.net.speakman.wookmark.fragments.imageviewfragments;
 
+import android.net.Uri;
 import nz.net.speakman.wookmark.R;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageViewFragment;
 import android.content.Context;
@@ -9,7 +10,7 @@ public class SearchViewFragment extends WookmarkBaseImageViewFragment {
 	private String mSearchTerm;
 	public SearchViewFragment(String searchTerm) {
 		super();
-		mSearchTerm = searchTerm;
+		mSearchTerm = searchTerm.trim();
 	}
 	
 	@Override
@@ -19,6 +20,6 @@ public class SearchViewFragment extends WookmarkBaseImageViewFragment {
 
 	@Override
 	public void setUri() {
-		mUri = getString(R.string.wookmark_endpoint_search) + mSearchTerm;
+		mUri = getString(R.string.wookmark_endpoint_search) + Uri.encode(mSearchTerm);
 	}
 }
