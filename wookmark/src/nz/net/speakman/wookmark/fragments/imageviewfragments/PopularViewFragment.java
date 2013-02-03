@@ -1,9 +1,10 @@
-package nz.net.speakman.wookmark.fragments.basic;
+package nz.net.speakman.wookmark.fragments.imageviewfragments;
 
 import nz.net.speakman.wookmark.R;
 import android.content.Context;
+import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageViewFragment;
 
-public class PopularViewFragment extends BasicViewFragment {
+public class PopularViewFragment extends WookmarkBaseImageViewFragment {
 
 	@Override
 	public void setUri() {

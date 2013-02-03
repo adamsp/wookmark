@@ -1,13 +1,15 @@
-package nz.net.speakman.wookmark.fragments;
+package nz.net.speakman.wookmark.fragments.imageviewfragments;
 
 import java.util.ArrayList;
 
+import android.view.LayoutInflater;
 import android.widget.Toast;
 import nz.net.speakman.wookmark.DownloadListener;
 import nz.net.speakman.wookmark.Downloader;
 import nz.net.speakman.wookmark.ImageViewActivity;
 import nz.net.speakman.wookmark.R;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
+import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import nz.net.speakman.wookmark.images.ImageLoaderFactory;
 import nz.net.speakman.wookmark.images.WookmarkImage;
 
@@ -65,6 +67,8 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 			mRefreshListeners = new ArrayList<DownloadListener>();
 		setRetainInstance(true);
 	}
+
+    public abstract void setUri();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,12 +77,23 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 			mImageMapping = new SparseArray<WookmarkImage>();
 		if (mImageLoader == null)
 			mImageLoader = ImageLoaderFactory.getImageLoader(getSherlockActivity());
+        setUri();
+        if(savedInstanceState == null) // First-time load!
+            getNewImages();
 	}
 
     @Override
     public void onDestroy() {
         cancelDownload();
         super.onDestroy();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        if (mView == null)
+            mView = inflater.inflate(R.layout.basic_view, null, false);
+        return mView;
     }
 	
 	protected void getNewImages() {

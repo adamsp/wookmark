@@ -2,13 +2,12 @@ package nz.net.speakman.wookmark;
 
 import nz.net.speakman.wookmark.fragments.MenuFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
-import nz.net.speakman.wookmark.fragments.WookmarkBaseImageViewFragment;
-import nz.net.speakman.wookmark.fragments.basic.PopularViewFragment;
-import nz.net.speakman.wookmark.fragments.basic.SearchViewFragment;
+import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageViewFragment;
+import nz.net.speakman.wookmark.fragments.imageviewfragments.PopularViewFragment;
+import nz.net.speakman.wookmark.fragments.imageviewfragments.SearchViewFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
