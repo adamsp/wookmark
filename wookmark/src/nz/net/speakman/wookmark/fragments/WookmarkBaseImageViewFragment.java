@@ -2,6 +2,7 @@ package nz.net.speakman.wookmark.fragments;
 
 import java.util.ArrayList;
 
+import android.widget.Toast;
 import nz.net.speakman.wookmark.DownloadListener;
 import nz.net.speakman.wookmark.Downloader;
 import nz.net.speakman.wookmark.ImageViewActivity;
@@ -12,7 +13,6 @@ import nz.net.speakman.wookmark.images.WookmarkImage;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -281,11 +281,10 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 				return;
 			}
 			if (null == results) {
-				AlertDialog.Builder dialog = new AlertDialog.Builder(mCtx);
-				dialog.setTitle(getString(R.string.wall_view_no_connection_title))
-						.setMessage(getString(R.string.wall_view_no_connection_message))
-						.setNeutralButton(getString(R.string.wall_view_no_connection_close_button), null);
-				dialog.show();
+                Toast.makeText(getSherlockActivity(),
+                        R.string.wall_view_no_connection_message,
+                        Toast.LENGTH_SHORT)
+                        .show();
 			}
 			onDownloadFinished(results);
 		}
