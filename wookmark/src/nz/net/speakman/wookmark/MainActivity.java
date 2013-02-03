@@ -129,18 +129,6 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 		outState.putInt("mContent", id);
 		outState.putBoolean("mProgressBarVisibility", mProgressBarVisibility);
 	}
-	
-	@Override
-	protected void onDestroy() {
-		if(mContent != null) {
-			// TODO Should this be done here, or in the fragment - probably in the fragment?
-			Log.d("Wookmark", "Killing background download task as onDestroy() was called before it returned.");
-			if(mContent instanceof Downloader) {
-				((Downloader)mContent).cancelDownload();
-			}
-		}
-		super.onDestroy();
-	}
 
 	private void setAboveView(Fragment fragment){
 		getSupportFragmentManager()

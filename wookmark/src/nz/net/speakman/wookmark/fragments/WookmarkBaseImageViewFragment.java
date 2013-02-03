@@ -43,7 +43,6 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	 */
 	private static final int END_OF_LIST_BUFFER_VALUE = 10;
 	protected View mView;
-	protected Context mCtx;
 	AsyncTask mDownloadTask;
 	protected String mUri;
 	SparseArray<WookmarkImage> mImageMapping;
@@ -72,11 +71,15 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 		super.onCreate(savedInstanceState);
 		if(mImageMapping == null)
 			mImageMapping = new SparseArray<WookmarkImage>();
-		if (mCtx == null)
-			mCtx = getActivity().getApplicationContext();
 		if (mImageLoader == null)
-			mImageLoader = ImageLoaderFactory.getImageLoader(mCtx);
+			mImageLoader = ImageLoaderFactory.getImageLoader(getSherlockActivity());
 	}
+
+    @Override
+    public void onDestroy() {
+        cancelDownload();
+        super.onDestroy();
+    }
 	
 	protected void getNewImages() {
 		if(downloadInProgress()) {
@@ -84,11 +87,9 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 			return;
 		}
 		Log.d("Wookmark", "Fetching new images.");
-		if(mRefreshListeners != null) {
-			for(DownloadListener listener : mRefreshListeners) {
-				listener.onDownloadStarted(this);
-			}
-		}
+        for(DownloadListener listener : mRefreshListeners) {
+            listener.onDownloadStarted(this);
+        }
 		mDownloadTask = new DownloadImagesTask().execute(mPage);
 		mPage++;
 	}
@@ -98,6 +99,7 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 		if(mDownloadTask != null) {
 			mDownloadTask.cancel(true);
 		}
+        notifyListenersDownloadIsFinished();
 	}
 	
 	@Override
@@ -118,12 +120,16 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
         if(images != null) {
 		    addNewImages(images);
         }
-		for(DownloadListener listener : mRefreshListeners) {
-			listener.onDownloadFinished(this);
-		}
+        notifyListenersDownloadIsFinished();
 	}
-	
-	protected void addNewImages(ArrayList<WookmarkImage> images) {
+
+    private void notifyListenersDownloadIsFinished() {
+        for(DownloadListener listener : mRefreshListeners) {
+            listener.onDownloadFinished(this);
+        }
+    }
+
+    protected void addNewImages(ArrayList<WookmarkImage> images) {
 		if(mImages == null) mImages = new ArrayList<WookmarkImage>();
         if(images.size() == 0) {
             mNoMoreImages = true;
@@ -180,7 +186,7 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 		if(convertView instanceof ImageView)
 			iv = (ImageView)convertView;
 		if(iv == null) {
-			iv = new ImageView(mCtx);
+			iv = new ImageView(getSherlockActivity());
 		}
 		WookmarkImage image = mImages.get(position);
 		iv.setId(image.getId());
@@ -283,7 +289,7 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 			if (null == results) {
                 Toast.makeText(getSherlockActivity(),
                         R.string.wall_view_no_connection_message,
-                        Toast.LENGTH_SHORT)
+                        Toast.LENGTH_LONG)
                         .show();
 			}
 			onDownloadFinished(results);
