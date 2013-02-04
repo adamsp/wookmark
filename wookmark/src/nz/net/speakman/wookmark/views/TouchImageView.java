@@ -18,6 +18,20 @@ import android.widget.ImageView;
 
 public class TouchImageView extends ImageView {
 
+    public interface MaxZoomCalculator {
+        /**
+         * Calculate a maximum zoom level based off of the width of the view and the scale
+         * factor that is used to scale the image to fit the view.
+         * @param viewWidth The width of the view.
+         * @param viewHeight The height of the view.
+         * @param fitImageToViewScale The value used to scale the image to fit the view.
+         * @return
+         */
+        public float calculateMaxZoom(float viewWidth, float viewHeight, float fitImageToViewScale);
+    }
+
+    MaxZoomCalculator maxZoomCalc;
+
 	Matrix matrix = new Matrix();
 
 	// We can be in one of these 3 states
@@ -145,6 +159,10 @@ public class TouchImageView extends ImageView {
 		maxScale = x;
 	}
 
+    public void setMaxZoomCalculator(MaxZoomCalculator mzc) {
+        this.maxZoomCalc = mzc;
+    }
+
 	private class ScaleListener extends
 			ScaleGestureDetector.SimpleOnScaleGestureListener {
 		@Override
@@ -231,7 +249,7 @@ public class TouchImageView extends ImageView {
 		//**** END ********///   
 		//width = MeasureSpec.getSize(widthMeasureSpec);
 		//height = MeasureSpec.getSize(heightMeasureSpec);
-		
+
 		// Fit to screen.
 		float scale;
 		float scaleX = (float) width / (float) bmWidth;
@@ -240,6 +258,10 @@ public class TouchImageView extends ImageView {
 		matrix.setScale(scale, scale);
 		setImageMatrix(matrix);
 		saveScale = 1f;
+
+        if(maxZoomCalc != null) {
+            setMaxZoom(maxZoomCalc.calculateMaxZoom(width, height, scale));
+        }
 
 		// Center the image
 		redundantYSpace = (float) height - (scale * (float) bmHeight);

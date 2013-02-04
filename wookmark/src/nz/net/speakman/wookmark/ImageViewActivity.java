@@ -5,17 +5,19 @@ import nz.net.speakman.wookmark.images.WookmarkImage;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.fedorvlasov.lazylist.ImageLoader;
+import nz.net.speakman.wookmark.views.TouchImageView;
 
 public class ImageViewActivity extends SherlockActivity {
 
 	public static final String IMAGE_KEY = "ImageKey";
+
+    private int MAX_IMAGE_ZOOM = 4;
 	
 	private static ImageLoader mImageLoader;
 	
@@ -33,7 +35,27 @@ public class ImageViewActivity extends SherlockActivity {
 		Intent intent = getIntent();
 		mImage = (WookmarkImage)intent.getParcelableExtra(IMAGE_KEY);
 
-		ImageView iv = (ImageView)findViewById(R.id.image_fullsize);
+		TouchImageView iv = (TouchImageView)findViewById(R.id.image_fullsize);
+        iv.setMaxZoomCalculator(new TouchImageView.MaxZoomCalculator() {
+            // Max Zoom is MAX_IMAGE_ZOOM x width of the image when it fills width of the view.
+            @Override
+            public float calculateMaxZoom(float viewWidth, float viewHeight, float fitImageToViewScale) {
+                // First, need the inverse of the scale so we can get the image back to "original" size.
+                float fitImageToViewScaleInverse = 1 / fitImageToViewScale;
+                // Now, we need the value to use to scale the "original" size to fit the view width (if image is tall)
+                // or view height (if image is wide).
+                float originalToViewWidthScale;
+                if(mImage.getWidth() < mImage.getHeight()) {
+                    originalToViewWidthScale = viewWidth / mImage.getWidth();
+                } else {
+                    originalToViewWidthScale = viewHeight / mImage.getHeight();
+                }
+                // Finally, we multiply them all together and by MAX_IMAGE_ZOOM, to make the max zoom 4x the
+                // width of the image when it is scaled to fit the width of the view.
+                float maxZoom = fitImageToViewScaleInverse * originalToViewWidthScale * MAX_IMAGE_ZOOM;
+                return maxZoom;
+            }
+        });
 		mImageLoader.DisplayImage(mImage.getImageUri().toString(), iv, false, new ImageLoader.OnImageLoadFinishedListener() {
 			@Override
 			public void onFinished() {
