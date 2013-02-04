@@ -63,6 +63,9 @@ public class ImageViewActivity extends SherlockActivity {
 			}
 		});
 		setTitle(mImage.getTitle());
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
 	@Override
@@ -76,15 +79,19 @@ public class ImageViewActivity extends SherlockActivity {
 		switch (item.getItemId()) {
 		case R.id.image_view_menu_detail:
 			showAdditionalDetailDialog();
-			break;
+            return true;
 		case R.id.image_view_menu_share:
 			startShareIntent();
-			break;
+            return true;
 		case R.id.image_view_menu_wookmark_com:
 			startWookmarkWebsiteIntent();
-			break;
+            return true;
 			// TODO Add a 'view on original site' link?
-		}
+        case android.R.id.home:
+            finish();
+            return true;
+
+        }
 		return super.onOptionsItemSelected(item);
 	}
 	
