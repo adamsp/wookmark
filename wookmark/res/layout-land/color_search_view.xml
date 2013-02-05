@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <net.margaritov.preference.colorpicker.ColorPickerView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/color_picker"
+        android:tag="landscape"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/color_picker_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <View
+            android:id="@+id/color_picker_chosen_color_view"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rectangle"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/color_search_default_text"
+            android:id="@+id/colorSearchButton"
+            />
+    </LinearLayout>
+    <!--<com.antipodalwall.AntipodalWallLayout-->
+        <!--android:id="@+id/antipodal_wall"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:scrollbars="vertical"-->
+        <!--android:columnCount="3"-->
+        <!--android:padding="2dp"-->
+        <!--android:verticalSpacing="5dp"-->
+        <!--android:horizontalSpacing="5dp">-->
+        <!--&lt;!&ndash; Your child views go here &ndash;&gt;-->
+    <!--</com.antipodalwall.AntipodalWallLayout>-->
+
+</LinearLayout>

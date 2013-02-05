@@ -78,8 +78,6 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 		if (mImageLoader == null)
 			mImageLoader = ImageLoaderFactory.getImageLoader(getSherlockActivity());
         setUri();
-        if(savedInstanceState == null) // First-time load!
-            getNewImages();
 	}
 
     @Override
@@ -156,13 +154,6 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 //		}
 	}
 
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		// http://stackoverflow.com/questions/6526874/call-removeview-on-the-childs-parent-first
-		((ViewGroup) mView.getParent()).removeView(mView);
-	}
-	
 	/**
 	 * Adapter methods.
 	 */

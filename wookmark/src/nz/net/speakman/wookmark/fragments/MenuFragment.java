@@ -39,7 +39,7 @@ public class MenuFragment extends ListFragment {
 			newContent = new NewViewFragment();
 			break;
 		case 2: // Color
-			//newContent = new ColorSearchViewFragment();
+			newContent = new ColorSearchViewFragment();
 			break;
 		case 3: // Settings
 			//newContent = new SettingsViewFragment(); // TODO
