@@ -22,6 +22,7 @@ import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageVi
  */
 public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
 
+    // TODO Since this has to match the color of the rect, this should be stored in a resource somewhere
     private int mColor = 0xff000000;
 
     @Override
@@ -51,6 +52,8 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
                 mColor = color;
             }
         });
+        // Will auto-restore the selected color after rotation, as mColor is saved by the OS.
+        cpv.setColor(mColor);
         Button b = (Button)v.findViewById(R.id.colorSearchButton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
