@@ -22,7 +22,7 @@ import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageVi
  */
 public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
 
-    private int mColor;
+    private int mColor = 0xff000000;
 
     @Override
     public void setUri() {
@@ -30,7 +30,12 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
     }
 
     private String getHexColor() {
-        return String.valueOf(mColor); // TODO
+        String color = Integer.toHexString(mColor);
+        if(color.length() == 8)
+            color = color.substring(2);
+        else
+            color = "000000";
+        return color;
     }
 
     @Override
@@ -50,12 +55,20 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                setUri();
+                showImagesView();
+                getNewImages();
             }
         });
-//        AntipodalWallLayout awl = (AntipodalWallLayout)v.findViewById(R.id.antipodal_wall);
-//        awl.setVisibility(View.GONE);
+        AntipodalWallLayout awl = (AntipodalWallLayout)v.findViewById(R.id.antipodal_wall);
+        awl.setVisibility(View.GONE);
         return v;
+    }
+
+    private void showImagesView() {
+        getSherlockActivity().findViewById(R.id.antipodal_wall).setVisibility(View.VISIBLE);
+        getSherlockActivity().findViewById(R.id.color_picker).setVisibility(View.GONE);
+        getSherlockActivity().findViewById(R.id.color_picker_details).setVisibility(View.GONE);
     }
 
     @Override
