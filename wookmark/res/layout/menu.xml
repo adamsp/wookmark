@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    android:name="nz.net.speakman.wookmark.fragments.MenuFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <ListView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@android:id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/list_padding"
-        android:paddingRight="@dimen/list_padding" />
-
-</fragment>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent">
+    <TextView
+        style="@style/MenuEntry"
+        android:id="@+id/menu_entry_popular"
+        android:text="@string/fragment_title_popular" />
+    <TextView
+        style="@style/MenuEntry"
+        android:id="@+id/menu_entry_new"
+        android:text="@string/fragment_title_new"/>
+    <TextView
+        style="@style/MenuEntry"
+        android:id="@+id/menu_entry_color_search"
+        android:text="@string/fragment_title_color_search"/>
+    <TextView
+        style="@style/MenuEntry"
+        android:id="@+id/menu_entry_settings"
+        android:text="@string/fragment_title_settings"/>
+    <TextView
+        style="@style/MenuEntry"
+        android:id="@+id/menu_entry_about"
+        android:text="@string/fragment_title_about"/>
+</LinearLayout>

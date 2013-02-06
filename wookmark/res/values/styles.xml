@@ -16,4 +16,12 @@
         <item name="android:autoLink">all</item>
     </style>
 
+    <style name="MenuEntry">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/padding_medium</item>
+        <item name="android:onClick">onClick</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
 </resources>

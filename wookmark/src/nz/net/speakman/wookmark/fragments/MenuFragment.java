@@ -1,5 +1,8 @@
 package nz.net.speakman.wookmark.fragments;
 
+import android.support.v4.app.Fragment;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
 import android.os.Bundle;
@@ -12,45 +15,40 @@ import android.widget.ListView;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.NewViewFragment;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.PopularViewFragment;
 
-public class MenuFragment extends ListFragment {
+public class MenuFragment extends Fragment implements View.OnClickListener {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.list, null);
+		LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.menu, null);
+        for(int i = 0; i < layout.getChildCount(); i++) {
+            layout.getChildAt(i).setOnClickListener(this);
+        }
+        return layout;
 	}
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		String[] menuTitles = getResources().getStringArray(R.array.menu_titles);
-		ArrayAdapter<String> menuTitleAdapter = new ArrayAdapter<String>(getActivity(), 
-				android.R.layout.simple_list_item_1, android.R.id.text1, menuTitles);
-		setListAdapter(menuTitleAdapter);
-	}
-	
-	@Override
-	public void onListItemClick(ListView lv, View v, int position, long id) {
-		WookmarkBaseFragment newContent = null;
-		switch (position) {
-		case 0: // Popular
-			newContent = new PopularViewFragment();
-			break;
-		case 1: // New
-			newContent = new NewViewFragment();
-			break;
-		case 2: // Color
-			newContent = new ColorSearchViewFragment();
-			break;
-		case 3: // Settings
-			//newContent = new SettingsViewFragment(); // TODO
-			break;
-		case 4: // About
-			newContent = new AboutFragment();
-			break;
-		}
-		if (newContent != null)
-			switchFragment(newContent);
-	}
+    @Override
+    public void onClick(View v) {
+        WookmarkBaseFragment newContent = null;
+        switch(v.getId()) {
+            case R.id.menu_entry_about:
+                newContent = new AboutFragment();
+                break;
+            case R.id.menu_entry_color_search:
+                newContent = new ColorSearchViewFragment();
+                break;
+            case R.id.menu_entry_new:
+                newContent = new NewViewFragment();
+                break;
+            case R.id.menu_entry_popular:
+                newContent = new PopularViewFragment();
+                break;
+            case R.id.menu_entry_settings:
+                //newContent = new SettingsFragment(); // TODO
+                break;
+        }
+        if(newContent != null)
+            switchFragment(newContent);
+    }
 
 	// the meat of switching the above fragment
 	private void switchFragment(WookmarkBaseFragment fragment) {
