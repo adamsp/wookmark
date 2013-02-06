@@ -41,8 +41,9 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.color_search_view, null);
-        ColorPickerView cpv = (ColorPickerView)v.findViewById(R.id.color_picker);
+        if(mView != null) return mView;
+        mView = inflater.inflate(R.layout.color_search_view, null);
+        ColorPickerView cpv = (ColorPickerView)mView.findViewById(R.id.color_picker);
         cpv.setOnColorChangedListener(new ColorPickerView.OnColorChangedListener() {
             @Override
             public void onColorChanged(int color) {
@@ -54,7 +55,9 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
         });
         // Will auto-restore the selected color after rotation, as mColor is saved by the OS.
         cpv.setColor(mColor);
-        Button b = (Button)v.findViewById(R.id.colorSearchButton);
+        ((GradientDrawable)mView.findViewById(R.id.color_picker_chosen_color_view).getBackground()).setColor(mColor);
+
+        Button b = (Button)mView.findViewById(R.id.colorSearchButton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,9 +66,9 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
                 getNewImages();
             }
         });
-        AntipodalWallLayout awl = (AntipodalWallLayout)v.findViewById(R.id.antipodal_wall);
+        AntipodalWallLayout awl = (AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall);
         awl.setVisibility(View.GONE);
-        return v;
+        return mView;
     }
 
     private void showImagesView() {
