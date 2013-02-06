@@ -87,6 +87,15 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // http://stackoverflow.com/questions/6526874/call-removeview-on-the-childs-parent-first
+        if(mView != null)
+            ((ViewGroup) mView.getParent()).removeView(mView);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (mView == null)
