@@ -1,16 +1,17 @@
 package nz.net.speakman.wookmark;
 
-import nz.net.speakman.wookmark.images.ImageLoaderFactory;
-import nz.net.speakman.wookmark.images.WookmarkImage;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.View;
+import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.fedorvlasov.lazylist.ImageLoader;
+import nz.net.speakman.wookmark.images.ImageLoaderFactory;
+import nz.net.speakman.wookmark.images.WookmarkImage;
 import nz.net.speakman.wookmark.views.TouchImageView;
 
 public class ImageViewActivity extends SherlockActivity {
@@ -86,7 +87,6 @@ public class ImageViewActivity extends SherlockActivity {
 		case R.id.image_view_menu_wookmark_com:
 			startWookmarkWebsiteIntent();
             return true;
-			// TODO Add a 'view on original site' link?
         case android.R.id.home:
             finish();
             return true;
@@ -110,23 +110,30 @@ public class ImageViewActivity extends SherlockActivity {
 	}
 
 	private void showAdditionalDetailDialog() {
-		String[] details = new String[] { 
-				String.format(getString(R.string.image_view_detail_image_title), mImage.getTitle()),
-				String.format(getString(R.string.image_view_detail_image_width), mImage.getWidth()),
-				String.format(getString(R.string.image_view_detail_image_height), mImage.getHeight()),
-				String.format(getString(R.string.image_view_detail_image_referer), mImage.getRefererUri()) // TODO Auto-link this - make it clickable?
-		};
-		
-		// 1. Instantiate an AlertDialog.Builder with its constructor
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		// 2. Chain together various setter methods to set the dialog characteristics
-		builder.setTitle(R.string.image_view_detail_dialog_title)
-		       .setItems(details, null)
-		       .setNeutralButton(android.R.string.ok, null);
+        View v = getLayoutInflater().inflate(R.layout.image_view_detail_dialog, null);
 
-		// 3. Get the AlertDialog from create()
-		builder.create().show();
+        String title = mImage.getTitle();
+        if(null == title || title.trim().length() == 0)
+            title = getString(R.string.image_view_dialog_image_no_title);
 
+        TextView tv = (TextView)v.findViewById(R.id.image_view_dialog_title);
+        tv.setText(title);
+
+        tv = (TextView)v.findViewById(R.id.image_view_dialog_height);
+        tv.setText(String.valueOf(mImage.getHeight()));
+
+        tv = (TextView)v.findViewById(R.id.image_view_dialog_width);
+        tv.setText(String.valueOf(mImage.getWidth()));
+
+        tv = (TextView)v.findViewById(R.id.image_view_dialog_referer);
+        tv.setText(mImage.getRefererUri().toString());
+
+        builder.setView(v);
+        builder.setTitle(R.string.image_view_detail_dialog_title)
+                .setNeutralButton(android.R.string.ok, null);
+
+        builder.create().show();
 	}
 }

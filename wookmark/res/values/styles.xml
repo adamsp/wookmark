@@ -30,4 +30,21 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="AlertDialog">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="AlertDialog.Heading">
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="AlertDialog.Detail">
+        <item name="android:padding">@dimen/padding_medium</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:text">test</item>
+        <item name="android:autoLink">all</item>
+    </style>
+
 </resources>

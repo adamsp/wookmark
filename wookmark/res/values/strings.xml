@@ -40,10 +40,11 @@
 
     <!-- Image view detail strings -->
     <string name="image_view_detail_dialog_title">Image Details</string>
-    <string name="image_view_detail_image_title">Title: %s</string>
-    <string name="image_view_detail_image_width">Width: %s</string>
-    <string name="image_view_detail_image_height">Height: %s</string>
-    <string name="image_view_detail_image_referer">Referer URL: %s</string>
+    <string name="image_view_dialog_image_title">title</string>
+    <string name="image_view_dialog_image_width">width</string>
+    <string name="image_view_dialog_image_height">height</string>
+    <string name="image_view_dialog_image_referer">referer</string>
+    <string name="image_view_dialog_image_no_title">(no title)</string>
 
     <!-- About page strings -->
     <string name="about_view_app_heading">The App</string>
