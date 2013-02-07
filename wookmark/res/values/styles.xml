@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="AppTheme" parent="android:Theme.Light"/>
 
     <style name="AboutFragmentFont">
         <item name="android:layout_width">wrap_content</item>
@@ -22,6 +22,13 @@
         <item name="android:padding">@dimen/padding_medium</item>
         <item name="android:onClick">onClick</item>
         <item name="android:textSize">20dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="MenuEntryLayout">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>

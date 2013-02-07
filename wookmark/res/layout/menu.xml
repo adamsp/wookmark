@@ -3,24 +3,69 @@
               android:orientation="vertical"
               android:layout_width="wrap_content"
               android:layout_height="match_parent">
-    <TextView
-        style="@style/MenuEntry"
-        android:id="@+id/menu_entry_popular"
-        android:text="@string/fragment_title_popular" />
-    <TextView
-        style="@style/MenuEntry"
-        android:id="@+id/menu_entry_new"
-        android:text="@string/fragment_title_new"/>
-    <TextView
-        style="@style/MenuEntry"
-        android:id="@+id/menu_entry_color_search"
-        android:text="@string/fragment_title_color_search"/>
-    <TextView
-        style="@style/MenuEntry"
-        android:id="@+id/menu_entry_settings"
-        android:text="@string/fragment_title_settings"/>
-    <TextView
-        style="@style/MenuEntry"
-        android:id="@+id/menu_entry_about"
-        android:text="@string/fragment_title_about"/>
+
+    <LinearLayout
+        style="@style/MenuEntryLayout"
+        android:id="@+id/menu_entry_popular">
+
+        <ImageView
+            style="@style/MenuEntry"
+            android:src="@drawable/ic_menu_star"/>
+
+        <TextView
+            style="@style/MenuEntry"
+            android:text="@string/fragment_title_popular"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MenuEntryLayout"
+        android:id="@+id/menu_entry_new">
+
+        <ImageView
+            style="@style/MenuEntry"
+            android:src="@drawable/ic_menu_gallery"/>
+
+        <TextView
+            style="@style/MenuEntry"
+            android:text="@string/fragment_title_new"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MenuEntryLayout"
+        android:id="@+id/menu_entry_color_search">
+
+        <ImageView
+            style="@style/MenuEntry"
+            android:src="@drawable/ic_menu_find"/>
+
+        <TextView
+            style="@style/MenuEntry"
+            android:text="@string/fragment_title_color_search"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MenuEntryLayout"
+        android:id="@+id/menu_entry_settings">
+
+        <ImageView
+            style="@style/MenuEntry"
+            android:src="@drawable/ic_menu_preferences"/>
+
+        <TextView
+            style="@style/MenuEntry"
+            android:text="@string/fragment_title_settings"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MenuEntryLayout"
+        android:id="@+id/menu_entry_about">
+
+        <ImageView
+            style="@style/MenuEntry"
+            android:src="@drawable/ic_menu_help"/>
+
+        <TextView
+            style="@style/MenuEntry"
+            android:text="@string/fragment_title_about"/>
+    </LinearLayout>
 </LinearLayout>
