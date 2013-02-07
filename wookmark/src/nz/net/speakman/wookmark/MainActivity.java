@@ -70,6 +70,8 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
         menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         menu.setFadeDegree(0.35f);
 
+        setSlidingActionBarEnabled(false);
+
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
@@ -116,7 +118,10 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 	public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                getSlidingMenu().showMenu();
+                if(getSlidingMenu().isMenuShowing())
+                    getSlidingMenu().showContent();
+                else
+                    getSlidingMenu().showMenu();
                 return true;
         }
 		return super.onOptionsItemSelected(item);
