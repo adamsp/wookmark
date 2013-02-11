@@ -22,7 +22,7 @@
         you have internet connectivity.</string>
 
     <!-- Search views default search texts -->
-    <string name="color_search_default_text">color hex code…</string>
+    <string name="color_search_default_text">Search Color</string>
     <string name="text_search_default_text">Search</string>
     
     <!-- Search view bad input text -->
