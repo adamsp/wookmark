@@ -9,14 +9,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    
-    
 
     <application
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/wookmark_viewer"
         android:label="@string/app_name"
         android:theme="@style/Theme.Sherlock" >
-        <uses-library android:name="com.google.android.maps" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
