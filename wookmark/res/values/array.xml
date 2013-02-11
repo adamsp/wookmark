@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="menu_titles">
-        <item>@string/fragment_title_popular</item>
-        <item>@string/fragment_title_new</item>
-        <item>@string/fragment_title_color_search</item>
-        <item>@string/fragment_title_settings</item>
-        <item>@string/fragment_title_about</item>
-    </string-array>
-
 </resources>
