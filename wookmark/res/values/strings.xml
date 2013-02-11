@@ -87,5 +87,10 @@
         2.0. Links to the source code and license can be found below.
         \nSource: https://github.com/JakeWharton/ActionBarSherlock
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="about_view_licenses_detail_color_picker">ColorPicker - This Color Picker was originally written
+        by Daniel Nilsson. The version I use in Wookmark Viewer is a modified version from Sergey Margaritov. This is
+        available under the Apache License, Version 2.0, linked below along with the source code.
+        \nSource: https://github.com/attenzione/android-ColorPickerPreference
+        \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
 
 </resources>

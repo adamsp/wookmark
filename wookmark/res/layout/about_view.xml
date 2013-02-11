@@ -47,6 +47,12 @@
             style="@style/AboutFragmentFont.Detail"
             android:text="@string/about_view_licenses_detail_sliding_menu"
             tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.Detail"
+            android:text="@string/about_view_licenses_detail_color_picker"
+            tools:context=".AboutActivity" />
+
     </LinearLayout>
 
 </ScrollView>
