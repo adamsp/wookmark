@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
             @Override
             public void onClick(View v) {
                 setUri();
-                showImagesView();
+                showImagesView(true);
                 getNewImages();
             }
         });
@@ -71,10 +72,24 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
         return mView;
     }
 
-    private void showImagesView() {
-        getSherlockActivity().findViewById(R.id.antipodal_wall).setVisibility(View.VISIBLE);
-        getSherlockActivity().findViewById(R.id.color_picker).setVisibility(View.GONE);
-        getSherlockActivity().findViewById(R.id.color_picker_details).setVisibility(View.GONE);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0
+                && imagesShown()) {
+            showImagesView(false);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean imagesShown() {
+        return getSherlockActivity().findViewById(R.id.antipodal_wall).getVisibility() == View.VISIBLE;
+    }
+
+    private void showImagesView(boolean showImages) {
+        getSherlockActivity().findViewById(R.id.antipodal_wall).setVisibility(showImages ? View.VISIBLE : View.GONE);
+        getSherlockActivity().findViewById(R.id.color_picker).setVisibility(showImages ? View.GONE : View.VISIBLE);
+        getSherlockActivity().findViewById(R.id.color_picker_details).setVisibility(showImages ? View.GONE : View.VISIBLE);
     }
 
     @Override

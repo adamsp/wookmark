@@ -1,5 +1,6 @@
 package nz.net.speakman.wookmark;
 
+import nz.net.speakman.wookmark.fragments.ColorSearchViewFragment;
 import nz.net.speakman.wookmark.fragments.MenuFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageViewFragment;
@@ -75,6 +76,15 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
+
+    @Override
+    public boolean onKeyDown (int keyCode, KeyEvent event) {
+        if(mContent != null && mContent instanceof ColorSearchViewFragment) {
+            if(((ColorSearchViewFragment)mContent).onKeyDown(keyCode, event))
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
