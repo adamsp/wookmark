@@ -2,16 +2,13 @@ package nz.net.speakman.wookmark.fragments;
 
 import android.support.v4.app.Fragment;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.R;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import nz.net.speakman.wookmark.fragments.imageviewfragments.ColorSearchViewFragment;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.NewViewFragment;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.PopularViewFragment;
 

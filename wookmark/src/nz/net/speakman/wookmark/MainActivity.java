@@ -1,6 +1,6 @@
 package nz.net.speakman.wookmark;
 
-import nz.net.speakman.wookmark.fragments.ColorSearchViewFragment;
+import nz.net.speakman.wookmark.fragments.imageviewfragments.ColorSearchViewFragment;
 import nz.net.speakman.wookmark.fragments.MenuFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageViewFragment;

@@ -1,4 +1,4 @@
-package nz.net.speakman.wookmark.fragments;
+package nz.net.speakman.wookmark.fragments.imageviewfragments;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
