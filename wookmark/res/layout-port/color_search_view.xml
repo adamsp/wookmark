@@ -32,6 +32,5 @@
             android:layout_margin="5dp"
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>
-    <include layout="@layout/basic_view" />
 
 </LinearLayout>

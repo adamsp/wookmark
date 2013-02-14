@@ -9,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import com.antipodalwall.AntipodalWallLayout;
 import net.margaritov.preference.colorpicker.ColorPickerView;
 import nz.net.speakman.wookmark.R;
-import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageViewFragment;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,8 +40,16 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(mView != null) return mView;
-        mView = inflater.inflate(R.layout.color_search_view, null);
+        // If mView exists & images are shown, then we're displaying results. All is handled already.
+        if(mView != null && imagesShown())
+            return mView;
+        // Otherwise we re-create the color picker and show that.
+        mView = inflater.inflate(R.layout.content_frame, null);
+        showImagesView(false);
+        return mView;
+    }
+
+    private void setListeners() {
         ColorPickerView cpv = (ColorPickerView)mView.findViewById(R.id.color_picker);
         cpv.setOnColorChangedListener(new ColorPickerView.OnColorChangedListener() {
             @Override
@@ -67,9 +73,6 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
                 getNewImages();
             }
         });
-        AntipodalWallLayout awl = (AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall);
-        awl.setVisibility(View.GONE);
-        return mView;
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -83,13 +86,19 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
     }
 
     private boolean imagesShown() {
-        return getSherlockActivity().findViewById(R.id.antipodal_wall).getVisibility() == View.VISIBLE;
+        View v = mView.findViewById(R.id.antipodal_wall);
+        return v != null;
     }
 
     private void showImagesView(boolean showImages) {
-        getSherlockActivity().findViewById(R.id.antipodal_wall).setVisibility(showImages ? View.VISIBLE : View.GONE);
-        getSherlockActivity().findViewById(R.id.color_picker).setVisibility(showImages ? View.GONE : View.VISIBLE);
-        getSherlockActivity().findViewById(R.id.color_picker_details).setVisibility(showImages ? View.GONE : View.VISIBLE);
+        ViewGroup vg = (ViewGroup)mView;
+        vg.removeAllViews();
+        if(showImages) {
+            getSherlockActivity().getLayoutInflater().inflate(R.layout.basic_view, vg);
+        } else {
+            getSherlockActivity().getLayoutInflater().inflate(R.layout.color_search_view, vg);
+            setListeners();
+        }
     }
 
     @Override
