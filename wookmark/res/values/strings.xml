@@ -47,6 +47,11 @@
     <string name="image_view_dialog_image_referer">referer</string>
     <string name="image_view_dialog_image_no_title">(no title)</string>
 
+    <!-- Image view orientation toast strings -->
+    <string name="image_view_orientation_unlocked_toast">Screen orientation unlocked</string>
+    <string name="image_view_orientation_locked_portrait_toast">Screen orientation locked to portrait</string>
+    <string name="image_view_orientation_locked_landscape_toast">Screen orientation locked to landscape</string>
+
     <!-- About page strings -->
     <string name="about_view_app_heading">The App</string>
     <string name="about_view_app_detail">Wookmark Viewer is an app designed to help you quickly and easily browse 

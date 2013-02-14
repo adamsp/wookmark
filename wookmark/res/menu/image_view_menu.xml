@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
         android:id="@+id/image_view_lock_orientation"
-        android:icon="@drawable/ic_menu_share"
+        android:icon="@drawable/device_access_screen_rotation"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/image_view_lock_rotation"/>
     <item
         android:id="@+id/image_view_menu_detail"
-        android:icon="@drawable/ic_menu_more"
+        android:icon="@drawable/action_about"
         android:orderInCategory="100"
         android:showAsAction="ifRoom"
         android:title="@string/image_view_menu_detail"/>
     <item
         android:id="@+id/image_view_menu_wookmark_com"
-        android:icon="@drawable/ic_menu_home"
+        android:icon="@drawable/location_web_site"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/image_view_menu_wookmark_com"/>
     <item
         android:id="@+id/image_view_menu_share"
-        android:icon="@drawable/ic_menu_share"
+        android:icon="@drawable/social_share"
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/image_view_menu_share"/>

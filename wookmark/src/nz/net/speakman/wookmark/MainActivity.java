@@ -90,7 +90,7 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
     public boolean onCreateOptionsMenu(Menu menu) {
 
     	menu.add(R.string.text_search_default_text)
-            .setIcon(R.drawable.abs__ic_search)
+            .setIcon(R.drawable.action_search)
             .setActionView(R.layout.collapsible_edittext)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
     	MenuItem item = menu.getItem(0);

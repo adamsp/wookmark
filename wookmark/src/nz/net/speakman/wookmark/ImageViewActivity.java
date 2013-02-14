@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -90,7 +91,7 @@ public class ImageViewActivity extends SherlockActivity {
                 startWookmarkWebsiteIntent();
                 return true;
             case R.id.image_view_lock_orientation:
-                toggleOrientationLock();
+                toggleOrientationLock(item);
                 return true;
             case android.R.id.home:
                 finish();
@@ -99,19 +100,32 @@ public class ImageViewActivity extends SherlockActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-    private void toggleOrientationLock() {
+    private void toggleOrientationLock(MenuItem item) {
         if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+            item.setIcon(getResources().getDrawable(R.drawable.device_access_screen_rotation));
+            showOrientationLockToast(R.string.image_view_orientation_unlocked_toast);
         } else {
             switch(getResources().getConfiguration().orientation) {
                 case Configuration.ORIENTATION_PORTRAIT:
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    item.setIcon(getResources().getDrawable(R.drawable.device_access_screen_locked_to_portrait));
+                    showOrientationLockToast(R.string.image_view_orientation_locked_portrait_toast);
                     break;
                 case Configuration.ORIENTATION_LANDSCAPE:
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    item.setIcon(getResources().getDrawable(R.drawable.device_access_screen_locked_to_landscape));
+                    showOrientationLockToast(R.string.image_view_orientation_locked_landscape_toast);
                     break;
             }
         }
+    }
+
+    private void showOrientationLockToast(int id) {
+        Toast.makeText(this,
+                id,
+                Toast.LENGTH_SHORT)
+                .show();
     }
 
     private void startShareIntent() {
