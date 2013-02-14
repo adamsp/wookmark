@@ -2,6 +2,8 @@ package nz.net.speakman.wookmark;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -78,24 +80,41 @@ public class ImageViewActivity extends SherlockActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.image_view_menu_detail:
-			showAdditionalDetailDialog();
-            return true;
-		case R.id.image_view_menu_share:
-			startShareIntent();
-            return true;
-		case R.id.image_view_menu_wookmark_com:
-			startWookmarkWebsiteIntent();
-            return true;
-        case android.R.id.home:
-            finish();
-            return true;
-
+            case R.id.image_view_menu_detail:
+                showAdditionalDetailDialog();
+                return true;
+            case R.id.image_view_menu_share:
+                startShareIntent();
+                return true;
+            case R.id.image_view_menu_wookmark_com:
+                startWookmarkWebsiteIntent();
+                return true;
+            case R.id.image_view_lock_orientation:
+                toggleOrientationLock();
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
         }
 		return super.onOptionsItemSelected(item);
 	}
-	
-	private void startShareIntent() {
+
+    private void toggleOrientationLock() {
+        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        } else {
+            switch(getResources().getConfiguration().orientation) {
+                case Configuration.ORIENTATION_PORTRAIT:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    break;
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    break;
+            }
+        }
+    }
+
+    private void startShareIntent() {
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
 		sendIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.image_view_share_content), mImage.getTitle(), mImage.getUrl()));

@@ -32,6 +32,7 @@
     <string name="image_view_menu_wookmark_com">View on Wookmark.com</string>
     <string name="image_view_menu_detail">Image details</string>
     <string name="image_view_menu_share">Share</string>
+    <string name="image_view_lock_rotation">Lock Screen Rotation</string>
 
     <!-- Image view Share strings -->
     <string name="image_view_share_title">Share Image</string>
