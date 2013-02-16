@@ -93,7 +93,7 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
             .setIcon(R.drawable.action_search)
             .setActionView(R.layout.collapsible_edittext)
             .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-    	MenuItem item = menu.getItem(0);
+    	final MenuItem item = menu.getItem(0);
     	EditText et = (EditText)item.getActionView();
     	et.setOnEditorActionListener(new OnEditorActionListener() {
 			
@@ -108,7 +108,7 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 						imm.hideSoftInputFromWindow(
 								v.getWindowToken(),
 								0);
-						v.clearFocus();
+						item.collapseActionView();
 						SearchViewFragment f = new SearchViewFragment(userInput);
 						switchContent(f);
 					} else {
@@ -128,10 +128,7 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 	public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if(getSlidingMenu().isMenuShowing())
-                    getSlidingMenu().showContent();
-                else
-                    getSlidingMenu().showMenu();
+                getSlidingMenu().toggle();
                 return true;
         }
 		return super.onOptionsItemSelected(item);
