@@ -73,21 +73,21 @@
         \nModified source: https://github.com/adamsp/AntipodalWall
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="about_view_licenses_detail_sliding_menu">SlidingMenu - This is the menu library that provides the menu
-        system used in Wookmark Viewer. I have made some minor modifications to the original (developed by Jeremy Feinstein) 
+        system used in Wookmark Viewer. I have made some minor modifications to the original (developed by Jeremy Feinstein)
         to support the ActionBarSherlock library. SlidingMenu is licensed under the Apache License, Version 2.0. Links to
         the original version, modified version and license can be found below.
         \nOriginal source: https://github.com/jfeinstein10/SlidingMenu
         \nModified source: https://github.com/adamsp/SlidingMenu
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
-    <string name="about_view_licenses_detail_lazy_list">LazyList - This library from Fedor Vlasov is used to enable lazy 
-        downloading of images off the UI thread. It provides automatic caching of images to the SD card for fast loading 
+    <string name="about_view_licenses_detail_lazy_list">LazyList - This library from Fedor Vlasov is used to enable lazy
+        downloading of images off the UI thread. It provides automatic caching of images to the SD card for fast loading
         later, as well as image scaling to preserve space. I\'ve made a few modifications to make scaling optional and provide
         some notification when an image has finished loading. This library is licensed under the MIT license. Links to the
         original source, modified source and license are provided below.
         \nOriginal source: https://github.com/thest1/LazyList
         \nModified source: https://github.com/adamsp/LazyList
         \nLicense: http://opensource.org/licenses/MIT</string>
-    <string name="about_view_licenses_detail_actionbar_sherlock">ActionBarSherlock - This library from Jake Wharton 
+    <string name="about_view_licenses_detail_actionbar_sherlock">ActionBarSherlock - This library from Jake Wharton
         facilitates the use of the ActionBar design pattern on devices running Android 2.x and up. The native ActionBar
         implementation is used in Android 4.0 and upwards. ActionBarSherlock is licensed under the Apache License, Version
         2.0. Links to the source code and license can be found below.
@@ -98,5 +98,17 @@
         available under the Apache License, Version 2.0, linked below along with the source code.
         \nSource: https://github.com/attenzione/android-ColorPickerPreference
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
+
+    <!-- Preferences strings -->
+    <string name="pref_default_view_key">default_view</string>
+    <string name="pref_default_view_dialog_title">Default View</string>
+
+    <string name="pref_number_columns_key">number_columns</string>
+    <string name="pref_number_columns_dialog_title">Number of Columns</string>
+    <string name="pref_number_columns_1">1 column</string>
+    <string name="pref_number_columns_2">2 columns</string>
+    <string name="pref_number_columns_3">3 columns</string>
+    <string name="pref_number_columns_4">4 columns</string>
+    <string name="pref_number_columns_default_value">3</string>
 
 </resources>

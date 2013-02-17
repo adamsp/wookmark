@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:custom="http://schemas.android.com/apk/res/speakman.whatsshakingnz" >
+    <ListPreference
+        android:defaultValue="@string/fragment_title_popular"
+        android:dialogTitle="@string/pref_default_view_dialog_title"
+        android:entries="@array/pref_default_view_entries"
+        android:entryValues="@array/pref_default_view_values"
+        android:key="@string/pref_default_view_key"
+        android:title="@string/pref_default_view_dialog_title" />
+
+    <ListPreference
+        android:defaultValue="@string/pref_number_columns_default_value"
+        android:dialogTitle="@string/pref_number_columns_dialog_title"
+        android:entries="@array/pref_number_columns_entries"
+        android:entryValues="@array/pref_number_columns_values"
+        android:key="@string/pref_number_columns_key"
+        android:title="@string/pref_number_columns_dialog_title" />
+
+</PreferenceScreen>

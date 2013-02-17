@@ -1,8 +1,10 @@
 package nz.net.speakman.wookmark.fragments;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.widget.LinearLayout;
 import nz.net.speakman.wookmark.MainActivity;
+import nz.net.speakman.wookmark.PreferencesActivity;
 import nz.net.speakman.wookmark.R;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,7 +42,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 newContent = new PopularViewFragment();
                 break;
             case R.id.menu_entry_settings:
-                //newContent = new SettingsFragment(); // TODO
+                startActivity(new Intent(getActivity(), PreferencesActivity.class));
                 break;
         }
         if(newContent != null)

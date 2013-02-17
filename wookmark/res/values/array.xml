@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string-array name="pref_default_view_entries">
+        <item>@string/fragment_title_popular</item>
+        <item>@string/fragment_title_new</item>
+    </string-array>
+    <string-array name="pref_default_view_values">
+        <item>@string/fragment_title_popular</item>
+        <item>@string/fragment_title_new</item>
+    </string-array>
+    <string-array name="pref_number_columns_entries">
+        <item>@string/pref_number_columns_1</item>
+        <item>@string/pref_number_columns_2</item>
+        <item>@string/pref_number_columns_3</item>
+        <item>@string/pref_number_columns_4</item>
+    </string-array>
+    <string-array name="pref_number_columns_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>
