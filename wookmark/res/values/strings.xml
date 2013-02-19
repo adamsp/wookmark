@@ -110,6 +110,7 @@
     <string name="pref_number_columns_2">2 columns</string>
     <string name="pref_number_columns_3">3 columns</string>
     <string name="pref_number_columns_4">4 columns</string>
+    <string name="pref_number_columns_5">5 columns</string>
     <string name="pref_number_columns_default_value">3</string>
 
 </resources>

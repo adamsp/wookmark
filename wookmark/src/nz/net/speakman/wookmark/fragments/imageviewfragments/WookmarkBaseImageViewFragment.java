@@ -2,6 +2,8 @@ package nz.net.speakman.wookmark.fragments.imageviewfragments;
 
 import java.util.ArrayList;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 import nz.net.speakman.wookmark.DownloadListener;
@@ -98,8 +100,14 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (mView == null)
+        if (mView == null) {
             mView = inflater.inflate(R.layout.basic_view, null, false);
+            SharedPreferences prefs = PreferenceManager
+                    .getDefaultSharedPreferences(getActivity());
+            String numCols = prefs.getString(getString(R.string.pref_number_columns_key),
+                    getString(R.string.pref_number_columns_default_value));
+            ((AntipodalWallLayout)mView).setNumberOfColumns(Integer.parseInt(numCols));
+        }
         return mView;
     }
 	
