@@ -1,15 +1,15 @@
 package nz.net.speakman.wookmark.fragments;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.widget.LinearLayout;
-import nz.net.speakman.wookmark.MainActivity;
-import nz.net.speakman.wookmark.PreferencesActivity;
-import nz.net.speakman.wookmark.R;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import nz.net.speakman.wookmark.MainActivity;
+import nz.net.speakman.wookmark.R;
+import nz.net.speakman.wookmark.SettingsActivity;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.ColorSearchViewFragment;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.NewViewFragment;
 import nz.net.speakman.wookmark.fragments.imageviewfragments.PopularViewFragment;
@@ -42,7 +42,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 newContent = new PopularViewFragment();
                 break;
             case R.id.menu_entry_settings:
-                startActivity(new Intent(getActivity(), PreferencesActivity.class));
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 break;
         }
         if(newContent != null)

@@ -11,7 +11,7 @@ import com.actionbarsherlock.app.SherlockPreferenceActivity;
  * Time: 12:34 PM
  * To change this template use File | Settings | File Templates.
  */
-public class PreferencesActivity extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,11 +1,10 @@
 package nz.net.speakman.wookmark;
 
-import nz.net.speakman.wookmark.fragments.imageviewfragments.ColorSearchViewFragment;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import nz.net.speakman.wookmark.fragments.imageviewfragments.*;
 import nz.net.speakman.wookmark.fragments.MenuFragment;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
-import nz.net.speakman.wookmark.fragments.imageviewfragments.WookmarkBaseImageViewFragment;
-import nz.net.speakman.wookmark.fragments.imageviewfragments.PopularViewFragment;
-import nz.net.speakman.wookmark.fragments.imageviewfragments.SearchViewFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,7 +34,16 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		if(savedInstanceState == null){
-			WookmarkBaseImageViewFragment fragment = new PopularViewFragment();
+            SharedPreferences prefs = PreferenceManager
+                    .getDefaultSharedPreferences(this);
+            String defaultView = prefs.getString(getString(R.string.pref_default_view_key),
+                    getString(R.string.pref_default_view_default_value));
+			WookmarkBaseImageViewFragment fragment;
+            if(defaultView.equals(getString(R.string.fragment_title_popular))) {
+                fragment = new PopularViewFragment();
+            } else {
+                fragment = new NewViewFragment();
+            }
 			fragment.setDownloadListener(this);
 			mContent = fragment;
 			// set the Above View

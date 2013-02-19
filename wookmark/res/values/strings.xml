@@ -102,6 +102,7 @@
     <!-- Preferences strings -->
     <string name="pref_default_view_key">default_view</string>
     <string name="pref_default_view_dialog_title">Default View</string>
+    <string name="pref_default_view_default_value">@string/fragment_title_popular</string>
 
     <string name="pref_number_columns_key">number_columns</string>
     <string name="pref_number_columns_dialog_title">Number of Columns</string>
