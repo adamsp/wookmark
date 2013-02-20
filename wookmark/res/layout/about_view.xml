@@ -29,9 +29,17 @@
             tools:context=".AboutActivity" />
 
         <TextView
+            style="@style/AboutFragmentFont.SubHeading"
+            android:text="@string/about_view_licenses_heading_actionbar_sherlock" />
+
+        <TextView
             style="@style/AboutFragmentFont.Detail"
             android:text="@string/about_view_licenses_detail_actionbar_sherlock"
             tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.SubHeading"
+            android:text="@string/about_view_licenses_heading_antipodal_wall" />
 
         <TextView
             style="@style/AboutFragmentFont.Detail"
@@ -39,14 +47,26 @@
             tools:context=".AboutActivity" />
 
         <TextView
+            style="@style/AboutFragmentFont.SubHeading"
+            android:text="@string/about_view_licenses_heading_lazy_list" />
+
+        <TextView
             style="@style/AboutFragmentFont.Detail"
             android:text="@string/about_view_licenses_detail_lazy_list"
             tools:context=".AboutActivity" />
 
         <TextView
+            style="@style/AboutFragmentFont.SubHeading"
+            android:text="@string/about_view_licenses_heading_sliding_menu" />
+
+        <TextView
             style="@style/AboutFragmentFont.Detail"
             android:text="@string/about_view_licenses_detail_sliding_menu"
             tools:context=".AboutActivity" />
+
+        <TextView
+            style="@style/AboutFragmentFont.SubHeading"
+            android:text="@string/about_view_licenses_heading_color_picker" />
 
         <TextView
             style="@style/AboutFragmentFont.Detail"

@@ -55,8 +55,13 @@
     <!-- About page strings -->
     <string name="about_view_app_heading">The App</string>
     <string name="about_view_app_detail">Wookmark Viewer is an app designed to help you quickly and easily browse 
-        the latest and most popular images on the image bookmarking website Wookmark.com. It also offers the ability
-        to search for images, or find images that match a given color.</string>
+        the latest and most popular images on the image bookmarking website Wookmark.com.
+        \nIt offers the ability to search for images that have been tagged with certain words - for example, try
+        a search for \'fruit\', or \'cars\'.
+        \nAn interesting feature is the Color Search, allowing you to search for images that match a given color. Note
+        that the color search may not return results for uncommon colors.
+        \nNote that due to the nature of the Wookmark website and the way in which the images are provided (via the
+        Wookmark API) it is not possible to filter out adult or not-safe-for-work content.</string>
     <string name="about_view_licenses_heading">Licenses</string>
     <string name="about_view_licenses_detail">This application is free and open source software. You can view the
         source code for this application on Github at the link below. This application is licensed under the Apache
@@ -65,21 +70,24 @@
         \nSource: https://github.com/adamsp/wookmark
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0
         </string>
-    <string name="about_view_licenses_detail_antipodal_wall">AntipodalWall - This is the main \'Pinterest-style\' view
+    <string name="about_view_licenses_heading_antipodal_wall">AntipodalWall</string>
+    <string name="about_view_licenses_detail_antipodal_wall">This is the main \'Pinterest-style\' view
         that is used throughout the app. Wookmark Viewer uses a heavily modified version of this library, originally written
         by Daniel López Lacalle. The original, as well as my modified version, can be found linked below. AntipodalWall
         is licensed under the Apache License, Version 2.0.
         \nOriginal source: https://github.com/expilu/AntipodalWall
         \nModified source: https://github.com/adamsp/AntipodalWall
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
-    <string name="about_view_licenses_detail_sliding_menu">SlidingMenu - This is the menu library that provides the menu
+    <string name="about_view_licenses_heading_sliding_menu">SlidingMenu</string>
+    <string name="about_view_licenses_detail_sliding_menu">This is the menu library that provides the menu
         system used in Wookmark Viewer. I have made some minor modifications to the original (developed by Jeremy Feinstein)
         to support the ActionBarSherlock library. SlidingMenu is licensed under the Apache License, Version 2.0. Links to
         the original version, modified version and license can be found below.
         \nOriginal source: https://github.com/jfeinstein10/SlidingMenu
         \nModified source: https://github.com/adamsp/SlidingMenu
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
-    <string name="about_view_licenses_detail_lazy_list">LazyList - This library from Fedor Vlasov is used to enable lazy
+    <string name="about_view_licenses_heading_lazy_list">LazyList</string>
+    <string name="about_view_licenses_detail_lazy_list">This library from Fedor Vlasov is used to enable lazy
         downloading of images off the UI thread. It provides automatic caching of images to the SD card for fast loading
         later, as well as image scaling to preserve space. I\'ve made a few modifications to make scaling optional and provide
         some notification when an image has finished loading. This library is licensed under the MIT license. Links to the
@@ -87,12 +95,14 @@
         \nOriginal source: https://github.com/thest1/LazyList
         \nModified source: https://github.com/adamsp/LazyList
         \nLicense: http://opensource.org/licenses/MIT</string>
-    <string name="about_view_licenses_detail_actionbar_sherlock">ActionBarSherlock - This library from Jake Wharton
+    <string name="about_view_licenses_heading_actionbar_sherlock">ActionBarSherlock</string>
+    <string name="about_view_licenses_detail_actionbar_sherlock">This library from Jake Wharton
         facilitates the use of the ActionBar design pattern on devices running Android 2.x and up. The native ActionBar
         implementation is used in Android 4.0 and upwards. ActionBarSherlock is licensed under the Apache License, Version
         2.0. Links to the source code and license can be found below.
         \nSource: https://github.com/JakeWharton/ActionBarSherlock
         \nLicense: http://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="about_view_licenses_heading_color_picker">ColorPicker</string>
     <string name="about_view_licenses_detail_color_picker">ColorPicker - This Color Picker was originally written
         by Daniel Nilsson. The version I use in Wookmark Viewer is a modified version from Sergey Margaritov. This is
         available under the Apache License, Version 2.0, linked below along with the source code.

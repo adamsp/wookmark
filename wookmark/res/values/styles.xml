@@ -5,15 +5,26 @@
     <style name="AboutFragmentFont">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/padding_medium</item>
     </style>
 
     <style name="AboutFragmentFont.Heading">
+        <item name="android:textSize">20dp</item>
         <item name="android:textColor">#7F7F7F</item>
+        <item name="android:padding">@dimen/padding_medium</item>
+    </style>
+
+    <style name="AboutFragmentFont.SubHeading">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#7F7F7F</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
     </style>
 
     <style name="AboutFragmentFont.Detail">
-        <item name="android:autoLink">all</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:autoLink">web</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:paddingBottom">@dimen/padding_medium</item>
     </style>
 
     <style name="MenuEntry">
