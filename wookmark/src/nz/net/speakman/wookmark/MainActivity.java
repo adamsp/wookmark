@@ -76,7 +76,7 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         menu.setShadowWidthRes(R.dimen.shadow_width);
         menu.setShadowDrawable(R.drawable.shadow);
-        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setBehindWidthRes(R.dimen.slidingmenu_width);
         menu.setFadeDegree(0.35f);
 
         setSlidingActionBarEnabled(false);
