@@ -42,6 +42,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
                 newContent = new PopularViewFragment();
                 break;
             case R.id.menu_entry_settings:
+                // TODO Possible to use PreferenceFragment for > 2.3?
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 break;
         }

@@ -83,6 +83,7 @@ public class MainActivity extends SlidingFragmentActivity implements DownloadLis
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.menu_icon);
 	}
 
     @Override
