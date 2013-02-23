@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import nz.net.speakman.wookmark.MainActivity;
 import nz.net.speakman.wookmark.images.WookmarkImage;
 
 import org.apache.http.HttpEntity;
@@ -20,6 +21,7 @@ import org.json.JSONTokener;
 import android.util.Log;
 
 public class WookmarkDownloader {
+    private static final String TAG = "WookmarkDownloader";
 	private HttpClient client;
 	
 	public WookmarkDownloader(HttpClient client) {
@@ -39,7 +41,7 @@ public class WookmarkDownloader {
 				images.add(WookmarkImage.generateFromJson(array.getJSONObject(i)));
 			}
 		} catch (JSONException e) {
-			Log.e("WookmarkDownloader", "Error parsing JSON", e);
+			if (MainActivity.DEBUG) Log.e(TAG, "Error parsing JSON", e);
 		}
 		return images;
 	}
@@ -56,7 +58,7 @@ public class WookmarkDownloader {
 			reader.close();
 			source.close();
 		} catch (IOException e) {
-			Log.e("WookmarkDownloader", "Error reading JSON string", e);
+			if (MainActivity.DEBUG) Log.e(TAG, "Error reading JSON string", e);
 		}
 
 		return sb.toString();
@@ -72,7 +74,7 @@ public class WookmarkDownloader {
 			final int statusCode = getResponse.getStatusLine().getStatusCode();
 
 			if (statusCode != HttpStatus.SC_OK) {
-				Log.w("WookmarkDownloader", "Error "
+				if (MainActivity.DEBUG) Log.w(TAG, "Error "
 						+ statusCode + " for URL " + url);
 				return null;
 			}
@@ -82,7 +84,7 @@ public class WookmarkDownloader {
 
 		} catch (IOException e) {
 			getRequest.abort();
-			Log.w("WookmarkDownloader", "Error for URL " + url + ". Returning null.",
+			if (MainActivity.DEBUG) Log.w(TAG, "Error for URL " + url + ". Returning null.",
 					e);
 		}
 		return null;

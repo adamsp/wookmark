@@ -1,5 +1,6 @@
 package nz.net.speakman.wookmark.images;
 
+import nz.net.speakman.wookmark.MainActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,6 +15,8 @@ import android.util.Log;
  *
  */
 public class WookmarkImage implements Parcelable {
+
+    private static final String TAG = "WookmarkImage";
 	
 	private int height;
 	private int width;
@@ -46,7 +49,7 @@ public class WookmarkImage implements Parcelable {
 				json.getString("title"),
 				json.getString("url"));
 		} catch (JSONException e) {
-			Log.e("Wookmark", "Ohshit, something went wrong with the Json!", e);
+			if (MainActivity.DEBUG) Log.e(TAG, "Problem instantiating WookmarkImage from JSON.", e);
 		}
 		return i;
 	}

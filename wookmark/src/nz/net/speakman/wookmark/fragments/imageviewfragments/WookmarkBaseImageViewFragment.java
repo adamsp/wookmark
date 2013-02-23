@@ -6,10 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.widget.Toast;
-import nz.net.speakman.wookmark.DownloadListener;
-import nz.net.speakman.wookmark.Downloader;
-import nz.net.speakman.wookmark.ImageViewActivity;
-import nz.net.speakman.wookmark.R;
+import nz.net.speakman.wookmark.*;
 import nz.net.speakman.wookmark.api.WookmarkDownloader;
 import nz.net.speakman.wookmark.fragments.WookmarkBaseFragment;
 import nz.net.speakman.wookmark.images.ImageLoaderFactory;
@@ -17,7 +14,6 @@ import nz.net.speakman.wookmark.images.WookmarkImage;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.AsyncTask;
@@ -41,6 +37,8 @@ import com.fedorvlasov.lazylist.ImageLoader;
  *
  */
 public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment implements Adapter, Downloader {
+
+    private static final String TAG = "WookmarkBaseImageViewFragment";
 	/**
 	 * The number of views before the end of available ones before
 	 * we start to download new ones.
@@ -113,10 +111,10 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	
 	protected void getNewImages() {
 		if(downloadInProgress()) {
-			Log.d("Wookmark", "Download already in progress, not updating images.");
+			if (MainActivity.DEBUG)Log.d(TAG, "Download already in progress, not updating images.");
 			return;
 		}
-		Log.d("Wookmark", "Fetching new images.");
+        if (MainActivity.DEBUG)Log.d(TAG, "Fetching new images.");
         for(DownloadListener listener : mRefreshListeners) {
             listener.onDownloadStarted(this);
         }
@@ -305,7 +303,7 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 		@Override
 		protected void onPostExecute(ArrayList<WookmarkImage> results) {
 			if (isCancelled()) {
-				Log.d("Wookmark",
+				if (MainActivity.DEBUG) Log.d(TAG,
 						"This download task has been killed. Not updating results.");
 				return;
 			}

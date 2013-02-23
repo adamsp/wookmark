@@ -24,6 +24,8 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class MainActivity extends SlidingFragmentActivity implements DownloadListener {
 
+    public static final boolean DEBUG = true;
+
 	private Fragment mContent;
 	private boolean mProgressBarVisibility;
 	
