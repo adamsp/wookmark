@@ -14,6 +14,7 @@ import nz.net.speakman.wookmark.images.WookmarkImage;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.AsyncTask;
@@ -47,6 +48,11 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	protected View mView;
 	AsyncTask mDownloadTask;
 	protected String mUri;
+    /**
+     * Used for easy access mapping an ID to the Image it belongs to. Faster
+     * than iterating over mImages to find the right image so we can navigate to the
+     * images view page when it is clicked.
+     */
 	SparseArray<WookmarkImage> mImageMapping;
 	ArrayList<WookmarkImage> mImages;
 	static ImageLoader mImageLoader;
@@ -69,6 +75,17 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
 	}
 
     public abstract void setUri();
+
+    /**
+     * If a subclass wants to start fresh with new images it can re-inflate the view
+     * and call this method, will reset existing images.
+     */
+    void clearAllImages() {
+        mPage = 0;
+        mImages = new ArrayList<WookmarkImage>();
+        mImageMapping = new SparseArray<WookmarkImage>();
+        mNoMoreImages = false;
+    }
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,15 +117,21 @@ public abstract class WookmarkBaseImageViewFragment extends WookmarkBaseFragment
                              Bundle savedInstanceState) {
         if (mView == null) {
             mView = inflater.inflate(R.layout.basic_view, null, false);
-            SharedPreferences prefs = PreferenceManager
-                    .getDefaultSharedPreferences(getActivity());
-            String numCols = prefs.getString(getString(R.string.pref_number_columns_key),
-                    getString(R.string.pref_number_columns_default_value));
-            ((AntipodalWallLayout)mView).setNumberOfColumns(Integer.parseInt(numCols));
+            setNumberOfColumnsOnView();
         }
         return mView;
     }
-	
+
+    void setNumberOfColumnsOnView() {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        String numCols = prefs.getString(getString(R.string.pref_number_columns_key),
+                getString(R.string.pref_number_columns_default_value));
+        AntipodalWallLayout awl = (AntipodalWallLayout)mView.findViewById(R.id.antipodal_wall);
+        if(awl != null)
+            awl.setNumberOfColumns(Integer.parseInt(numCols));
+    }
+
 	protected void getNewImages() {
 		if(downloadInProgress()) {
 			if (MainActivity.DEBUG)Log.d(TAG, "Download already in progress, not updating images.");

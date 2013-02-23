@@ -95,6 +95,8 @@ public class ColorSearchViewFragment extends WookmarkBaseImageViewFragment {
         vg.removeAllViews();
         if(showImages) {
             getSherlockActivity().getLayoutInflater().inflate(R.layout.basic_view, vg);
+            setNumberOfColumnsOnView();
+            clearAllImages();
         } else {
             getSherlockActivity().getLayoutInflater().inflate(R.layout.color_search_view, vg);
             setListeners();
