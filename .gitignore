@@ -188,3 +188,6 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+proguard_logs/
+*.apk
