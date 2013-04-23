@@ -3,6 +3,10 @@ Wookmark Viewer
 
 Wookmark Viewer is an Android application for viewing images on [Wookmark.com](http://www.wookmark.com), an image bookmarking site. It utilises a 'Pinterest-style' view to display images. It offers the ability to browse the most popular images, the newest images that have been bookmarked, or search for images by color or by description.
 
+**This project is currently on hold**, due to the fact that NSFW images are not allowed in applications on the Google Play store. Since the Wookmark API has no way of filtering these images (even though the data [is](http://www.wookmark.com/about/blog/23/mark-offensive-images-as-nsfw)/[should be](http://www.wookmark.com/about/etiquette) available for a given image) until that data becomes available (either the tags are supplied, or there is a NSFW boolean added to the JSON) this application will not be published to the Google Play store.
+
+In the meantime you can still pull the source & build your own, if you'd like.
+
 
 
 Developed By
